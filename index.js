@@ -5,6 +5,8 @@ var app = express();
 var fetch = require('node-fetch');
 var https = require('https');
 
+var script_state = require('./js/script_state');
+
 const port = process.env.PORT || 3000 ;
 
 app.get("/", function(req, res){
@@ -18,8 +20,11 @@ app.get("/state/:state", function(req, res){
       .then(res => res.json())
       .then(json => {
         console.log('fetch', json);
-        res.send('data fetched look your console');
+        // res.send('data fetched look your console');
+        res.send(json);
+        script_state.display_state(json);
       });
+
 })
 
 app.listen(port, function () {
