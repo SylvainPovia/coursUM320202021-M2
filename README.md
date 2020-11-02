@@ -54,3 +54,6 @@ Quelles sont les motivations ? notamment le partage de données entre scientifiq
 l’administration (ministères, collectivités territoriales, établissements publics...) sera dorénavant tenue, lorsqu’elle communique un document administratif au format électronique, de le mettre à disposition du citoyen « dans un standard ouvert, aisément réutilisable et exploitable par un système de traitement automatisé ». Ce droit de réutilisation vaut également pour les documents administratifs divulgués par les acteurs privés chargés d'une mission de service public à caractère industriel ou commercial. Si vous voulez des données de l’administration qui ne sont pas déjà ouvertes, il faut les demander à l’administration, si elle ne les fournit pas, vous pouvez demander au CADA  ( Commission d’Accès aux Documents Administratifs ) qui peut imposer à l’administration de vous les ouvrir … mais sous combien de temps ? La loi date de octobre 2016 et ne sera pleinement applicable que fin 2018.
 
 
+Liens heroku : https://server-node-api.herokuapp.com/
+
+
