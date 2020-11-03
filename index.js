@@ -16,7 +16,7 @@ var state_id = require("./js/state_id");
 const port = process.env.PORT || 3000 ;
 
 app.get("/", function(req, res){
-    res.send("helloWorld !");
+    res.send("USA Covid-19 data State by state");
 })
 
 app.get('/state/get_state/:name', function(req, res){
