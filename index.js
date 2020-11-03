@@ -4,13 +4,25 @@ var express = require('express');
 var app = express();
 var fetch = require('node-fetch');
 var https = require('https');
+//var redirect = require('redirect');
+var filter = require('filter');
+
 
 var script_state = require('./js/script_state');
+var data = require("./js/data");
+var state_id = require("./js/state_id");
+
 
 const port = process.env.PORT || 3000 ;
 
 app.get("/", function(req, res){
     res.send("helloWorld !");
+})
+
+app.get('/state/get_state/:name', function(req, res){
+  let name = req.params.name;
+  state_id = state_id.get_state(name);
+  res.redirect('/state/'+state_id);
 })
 
 app.get("/state/:state", function(req, res){
