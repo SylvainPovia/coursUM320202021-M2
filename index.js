@@ -13,7 +13,7 @@ var data = require("./js/data");
 var state_id = require("./js/state_id");
 
 
-const port = process.env.PORT || 3000 ;
+const port = process.env.PORT || 3000;
 
 app.get("/", function(req, res){
     res.send("USA Covid-19 data State by state");
@@ -31,10 +31,16 @@ app.get("/state/:state", function(req, res){
     fetch(url)
       .then(res => res.json())
       .then(json => {
-        console.log('fetch', json);
+
+        res.format({
+          'text/html' : function() {
+            res.json(json);
+          }
+        })
+        // console.log('fetch', json);
         // res.send('data fetched look your console');
-        res.send(json);
-        script_state.display_state(json);
+        // res.send(json);
+        // script_state.display_state(json);
       });
 
 })
