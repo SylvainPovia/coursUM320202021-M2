@@ -56,4 +56,8 @@ var states_table = {
   }
   
 
+<<<<<<< HEAD
 module.exports = {states_table};
+=======
+module.exports = {states_table};
+>>>>>>> bcac438ec18218de4d843f0856271ede62ca10cb
