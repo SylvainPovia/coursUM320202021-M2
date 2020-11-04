@@ -48,7 +48,7 @@ for (let state of states ) {
 	for(var element of get_json_ville['_links']['city:items']){
 	    let url_id = element.href;
 	    let full_name = element.name
-	    console.log("ville :" , full_name)
+	   // console.log("ville :" , full_name)
 	    let get_info_ville = await fetch(url_id)
 	    let get_json_info_ville =  await get_info_ville.json()
 	    let population = get_json_info_ville["population"]
@@ -72,7 +72,7 @@ for (let state of states ) {
 			info_villes[full_name]["prefixe"] = state
 			info_villes[full_name]["population"] = population
 		  
-			console.log("info :",info_villes[full_name])
+			//console.log("info :",info_villes[full_name])
 		    continue 
 	    }
 	  
@@ -80,18 +80,15 @@ for (let state of states ) {
     	"prefixe" : state.id ,
     	"population" : population
     	}
-    	console.log("info case 2 :",info_villes[full_name])
+    	//console.log("info case 2 :",info_villes[full_name])
+
 
   }
-
-
-
-
-
-    let url_id = get_json["_embedded"]["city:search-results"][0]['_links']["city:item"]["href"]
     
 
 }
+
+	return info_villes
 
 }
 
