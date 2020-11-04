@@ -16,12 +16,15 @@ app.get("/", function(req, res){
     res.send("helloWorld !");
 })
 
-app.get("/state/:state", function(req, res){
-    let state = req.params.state;
-    script_state.init();
+app.get("/ville/:ville", function(req, res){
+  let ville = req.params.ville;
+  let data = info_ville[ville];
+  res.send(data);
 
 })
+var info_ville = script_state.init();
 
 app.listen(port, function () {
     console.log('Serveur listening on port ' + port);
+
 });
