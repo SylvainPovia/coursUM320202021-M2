@@ -1,4 +1,3 @@
-
 'use strict'
 
 var express = require('express');
@@ -12,6 +11,7 @@ var state_list = require('./js/data.js');
 
 const port = process.env.PORT || 3000 ;
 
+// Gestion des routes
 app.get("/", function(req, res){
     res.send("USA Covid-19 data State by state");
 })
@@ -25,9 +25,27 @@ app.get("/ville/:ville", function(req, res){
         res.json(value[ville]);
       }
     })
-    
+
   });
 })
+
+app.get("/current_covid", function(req, res){
+    let url = "https://api.covidtracking.com/v1/states/current.json";
+    fetch(url)
+      .then(res => res.json())
+      .then(json => {
+
+        res.format({
+          'text/html' : function() {
+           res.json(json);
+          }
+        })
+
+      });
+})
+
+
+
 var info_ville = script_state.init();
 
 app.listen(port, function () {
