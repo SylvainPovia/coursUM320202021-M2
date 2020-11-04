@@ -1,7 +1,7 @@
 var states_table = {
     "states_table":[
-        {"id":"AL","name":"Alabama"},
-        //{"id":"AK","name":"Alaska"}
+        //{"id":"AL","name":"Alabama"},
+        {"id":"AK","name":"Alaska"}
         // {"id":"AZ","name":"Arizona"},
         // {"id":"AR","name":"Arkansas"},
         // {"id":"CA","name":"California"},
