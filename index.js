@@ -4,47 +4,51 @@ var express = require('express');
 var app = express();
 var fetch = require('node-fetch');
 var https = require('https');
-//var redirect = require('redirect');
-var filter = require('filter');
-
 
 var script_state = require('./js/script_state');
-var data = require("./js/data");
-var state_id = require("./js/state_id");
 
+var state_list = require('./js/data.js');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000 ;
 
+// Gestion des routes
 app.get("/", function(req, res){
     res.send("USA Covid-19 data State by state");
 })
 
-app.get('/state/get_state/:name', function(req, res){
-  let name = req.params.name;
-  state_id = state_id.get_state(name);
-  res.redirect('/state/'+state_id);
+app.get("/ville/:ville", function(req, res){
+  let ville = req.params.ville;
+  let data = info_ville[ville];
+  info_ville.then((value) => {
+    res.format({
+      'application/json' : function() {
+        res.json(value[ville]);
+      }
+    })
+
+  });
 })
 
-app.get("/state/:state", function(req, res){
-    let state = req.params.state;
-    let url = "https://api.teleport.org/api/countries/iso_alpha2%3AUS/admin1_divisions/geonames%3A"+state+"/cities/";
+app.get("/current_covid", function(req, res){
+    let url = "https://api.covidtracking.com/v1/states/current.json";
     fetch(url)
       .then(res => res.json())
       .then(json => {
 
         res.format({
           'text/html' : function() {
-            res.json(json);
+           res.json(json);
           }
         })
-        // console.log('fetch', json);
-        // res.send('data fetched look your console');
-        // res.send(json);
-        // script_state.display_state(json);
-      });
 
+      });
 })
+
+
+
+var info_ville = script_state.init();
 
 app.listen(port, function () {
     console.log('Serveur listening on port ' + port);
+
 });
