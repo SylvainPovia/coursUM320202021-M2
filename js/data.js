@@ -1,6 +1,6 @@
 var states_table = {
     "states_table":[
-        //{"id":"AL","name":"Alabama"},
+        {"id":"AL","name":"Alabama"},
         //{"id":"AK","name":"Alaska"}
         // {"id":"AZ","name":"Arizona"},
         // {"id":"AR","name":"Arkansas"},
@@ -31,7 +31,7 @@ var states_table = {
         // {"id":"NH","name":"New Hampshire"},
         // {"id":"NJ","name":"New Jersey"},
         // {"id":"NM","name":"New Mexico"},
-        {"id":"NY","name":"New York"}
+        // {"id":"NY","name":"New York"}
         // {"id":"NC","name":"North Carolina"},
         // {"id":"ND","name":"North Dakota"},
         // {"id":"OH","name":"Ohio"},

@@ -14,10 +14,10 @@ const port = process.env.PORT || 3000 ;
 
 // Gestion des routes
 app.get("/", function(req, res){
-    res.send("USA Covid-19 data State by state");
+    res.send("USA Covid-19");
 })
 
-app.get("/ville/:ville", function(req, res){
+app.get("etat/:etat/ville/:ville", function(req, res){
   let ville = req.params.ville;
   info_ville.then((value) => {
     res.format({
