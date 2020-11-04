@@ -40,7 +40,7 @@ var init = async function init(){
         }
 
 
-        info_villes[full_name]["prefixe"] = state
+        info_villes[full_name]["prefixe"] = state.id
         info_villes[full_name]["population"] = population
 
         //console.log("info :",info_villes[full_name])
