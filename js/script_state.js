@@ -1,5 +1,3 @@
-
-
 var init = async function init(){
   var info_villes = {};
   let states = state_list.states_table.states_table
