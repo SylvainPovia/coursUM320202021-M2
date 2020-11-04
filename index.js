@@ -5,8 +5,9 @@ var app = express();
 var fetch = require('node-fetch');
 var https = require('https');
 
-var script_state = require('./js/script_state');
-
+var script_state = require('./js/script_state.js');
+var state_id = require('./js/state_id.js');
+var root_state_covid = require('./js/root_state_covid.js');
 var state_list = require('./js/data.js');
 
 const port = process.env.PORT || 3000 ;
@@ -18,7 +19,6 @@ app.get("/", function(req, res){
 
 app.get("/ville/:ville", function(req, res){
   let ville = req.params.ville;
-  let data = info_ville[ville];
   info_ville.then((value) => {
     res.format({
       'application/json' : function() {
@@ -27,6 +27,20 @@ app.get("/ville/:ville", function(req, res){
     })
 
   });
+})
+
+app.get("/etat/:etat", function(req, res){
+    let state = req.params.etat;
+    state_id = state_id.get_state_id(state);
+    var info_state = root_state_covid.root_state_covid(state_id);
+    info_state.then((value) => {
+      res.format({
+        'application/json' : function() {
+          res.json(value);
+        }
+      })
+
+      });
 })
 
 app.get("/current_covid", function(req, res){

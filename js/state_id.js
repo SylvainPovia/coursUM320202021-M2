@@ -1,11 +1,11 @@
 var data = require("./data");
 var states_table = data.states_table['states_table'];
 
-var get_state = function get_state(name){
+var get_state_id = function get_state_id(name){
     filtered = states_table.filter(function(item){
         return item.name == name;
     });
     return filtered['0']['id'];
 }
 
-module.exports = {get_state};
+module.exports = {get_state_id};
