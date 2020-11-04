@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000 ;
 
 // Gestion des routes
 app.get("/", function(req, res){
-    res.send("USA Covid-19 data State by state");
+    res.send("USA Covid-19");
 })
 
 app.get("/ville/:ville", function(req, res){
