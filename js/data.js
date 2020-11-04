@@ -1,11 +1,11 @@
 var states_table = {
     "states_table":[
-        {"id":"AL","name":"Alabama"},
+        //{"id":"AL","name":"Alabama"},
         {"id":"AK","name":"Alaska"},
-        {"id":"AZ","name":"Arizona"},
-        {"id":"AR","name":"Arkansas"},
-        {"id":"CA","name":"California"},
-        {"id":"CO","name":"Colorado"},
+        //{"id":"AZ","name":"Arizona"},
+        //{"id":"AR","name":"Arkansas"},
+        //{"id":"CA","name":"California"},
+        /*{"id":"CO","name":"Colorado"},
         {"id":"CT","name":"Connecticut"},
         {"id":"DE","name":"Delaware"},
         {"id":"FL","name":"Florida"},
@@ -50,8 +50,8 @@ var states_table = {
         {"id":"DC","name":"Washington, D.C."},
         {"id":"WV","name":"West Virginia"},
         {"id":"WI","name":"Wisconsin"},
-        {"id":"WY","name":"Wyoming"}],
-  
+        {"id":"WY","name":"Wyoming"}*/],
+      
     "count":51
   }
   
