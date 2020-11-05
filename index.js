@@ -35,6 +35,13 @@ app.get("/etat/:etat/ville/:ville", function(req, res){
 })
 
 
+app.get("*", function(req, res){
+  res.redirect("/")
+  alert("Bad request, 404 error")
+  });
+
+
+
 app.get("/etat/:etat", function(req, res){
     let state = req.params.etat;
     var info_state = root_state_covid.root_state_covid(state);
@@ -48,27 +55,6 @@ app.get("/etat/:etat", function(req, res){
       });
 })
 
-app.get("*", function(req, res){
-  res.sendFile(__dirname + "/public/index.html")
-  alert("Bad request, Erreur 404")
-  });
-
-
-// app.get("/current_covid", function(req, res){
-//     let url = "https://api.covidtracking.com/v1/states/current.json";
-//     fetch(url)
-//       .then(res => res.json())
-//       .then(json => {
-
-//         res.format({
-//           'text/html' : function() {
-//            res.json(json);
-//           }
-//         })
-
-//       });
-// })
-
 app.get("/state_list", function(req, res){
     res.format({
       'application/json' : function() {
@@ -77,6 +63,10 @@ app.get("/state_list", function(req, res){
     })
 })
 
+app.get("*", function(req, res){
+  res.sendFile(__dirname + "/public/index.html")
+  alert("Bad request, Erreur 404")
+  });
 
 app.listen(port, function () {
     console.log('Serveur listening on port ' + port);
