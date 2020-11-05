@@ -5,6 +5,7 @@ var app = express();
 var fetch = require('node-fetch');
 var https = require('https');
 
+
 var script_state = require('./js/script_state.js');
 var state_id = require('./js/state_id.js');
 var root_state_covid = require('./js/root_state_covid.js');
@@ -17,12 +18,14 @@ app.get("/", function(req, res){
     res.send("USA Covid-19");
 })
 
-app.get("/ville/:ville", function(req, res){
+app.get("/etat/:etat/ville/:ville", function(req, res){
   let ville = req.params.ville;
+  let etat = req.params.etat;
+  var info_ville = script_state.init(ville, etat);
   info_ville.then((value) => {
     res.format({
       'application/json' : function() {
-        res.json(value[ville]);
+        res.json(value);
       }
     })
 
@@ -58,9 +61,14 @@ app.get("/current_covid", function(req, res){
       });
 })
 
+app.get("/state_list", function(req, res){
+    res.format({
+      'application/json' : function() {
+        res.json(state_list);
+      }
+    })
+})
 
-
-var info_ville = script_state.init();
 
 app.listen(port, function () {
     console.log('Serveur listening on port ' + port);
