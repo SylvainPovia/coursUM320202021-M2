@@ -5,7 +5,14 @@ var app = express();
 var fetch = require('node-fetch');
 var https = require('https');
 var alert = require('alert')
+const cors = require('cors');
 
+var corsOptions = {
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200 // For legacy browser support
+}
+
+app.use(cors(corsOptions))
 app.use(express.static("public"));
 
 var script_state = require('./js/script_state.js');
@@ -30,8 +37,8 @@ app.get("/etat/:etat/ville/:ville", function(req, res){
 
 
 app.get("*", function(req, res){
-  res.sendFile(__dirname + "/public/index.html")
-  alert("Erreur 404")
+  res.redirect("/")
+  alert("Bad request, 404 error")
   });
 
 
@@ -48,6 +55,7 @@ app.get("/etat/:etat", function(req, res){
 
       });
 })
+
 
 // app.get("/current_covid", function(req, res){
 //     let url = "https://api.covidtracking.com/v1/states/current.json";
