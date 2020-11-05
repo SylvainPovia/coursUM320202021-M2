@@ -1,4 +1,15 @@
-var root_state_covid = async function root_state_covid(state_id){
+var root_state_covid = async function root_state_covid(state){
+  let states = state_list.states_table.states_table
+  var get_state_id = function get_state_id(name){
+
+    filtered = states.filter(function(item){
+        return item.name.toLowerCase() == name.toLowerCase();
+    });
+
+    return filtered['0']['id'];
+}
+
+  state_id = get_state_id(state);
   var info_state = {};
   // Données covid
   let url_covid = "https://api.covidtracking.com/v1/states/current.json";
@@ -11,7 +22,10 @@ var root_state_covid = async function root_state_covid(state_id){
   let get_json_ville=  await get_name_ville.json()
 
   info_state[state_id] = {}
-  info_state[state_id] = get_json_covid_info.filter(function(item){return item.state == state_id;})[0]
+  temp = get_json_covid_info.filter(function(item){return item.state == state_id;})[0]
+  info_state[state_id] = {"state":temp["state"], "date":temp["date"], "death":temp["death"], 
+                            "positive":temp["positive"], "totalTestResultsSource":temp["positive"],
+                            "hospitalizedCurrently":temp["hospitalizedCurrently"]}
   info_state[state_id]['cities'] = {}
 
   // Boucle cities
