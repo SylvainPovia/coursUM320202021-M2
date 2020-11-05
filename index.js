@@ -5,8 +5,14 @@ var app = express();
 var fetch = require('node-fetch');
 var https = require('https');
 var alert = require('alert')
+const cors = require('cors')
 
-app.use(express.static("public"));
+var corsOptions = {
+  origin: ['http://localhost:3000', 'https://theo-oriol.github.io/coursUM320202021-M2/'],
+  optionsSuccessStatus: 200 // For legacy browser support
+}
+
+app.use(express.static("public"), cors(corsOptions));
 
 var script_state = require('./js/script_state.js');
 var root_state_covid = require('./js/root_state_covid.js');
@@ -29,13 +35,6 @@ app.get("/etat/:etat/ville/:ville", function(req, res){
 })
 
 
-app.get("*", function(req, res){
-  res.sendFile(__dirname + "/public/index.html")
-  alert("Erreur 404")
-  });
-
-
-
 app.get("/etat/:etat", function(req, res){
     let state = req.params.etat;
     var info_state = root_state_covid.root_state_covid(state);
@@ -48,6 +47,12 @@ app.get("/etat/:etat", function(req, res){
 
       });
 })
+
+app.get("*", function(req, res){
+  res.sendFile(__dirname + "/public/index.html")
+  alert("Bad request, Erreur 404")
+  });
+
 
 // app.get("/current_covid", function(req, res){
 //     let url = "https://api.covidtracking.com/v1/states/current.json";
