@@ -12,11 +12,14 @@ var getAll = function (selector, scope) {
 // setup typewriter effect in the terminal demo
 if (document.getElementsByClassName('demo').length > 0) {
   var i = 0;
-  var txt = `node index
-            [Entry mode; press Ctrl+C to quit]
+  var txt = `curl https://server-node-api.herokuapp.com/etat/Alaska/ville/Juneau
 
+  result :
+
+  {"Juneau":{"state":"AK","date":20201104,"death":84,"positive":17860,"totalTestResultsSource":17860,
+             "hospitalizedCurrently":95,"prefixe":"AK","population":32756}}
          `;
-  var speed = 60;
+  var speed = 40;
 
   function typeItOut () {
     if (i < txt.length) {
