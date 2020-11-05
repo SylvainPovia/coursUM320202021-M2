@@ -4,6 +4,7 @@ var express = require('express');
 var app = express();
 var fetch = require('node-fetch');
 var https = require('https');
+var alert = require('alert')
 
 app.use(express.static("public"));
 
@@ -15,18 +16,25 @@ const port = process.env.PORT || 3000 ;
 
 
 app.get("/etat/:etat/ville/:ville", function(req, res){
-  let ville = req.params.ville;
-  let etat = req.params.etat;
-  var info_ville = script_state.init(ville, etat);
-  info_ville.then((value) => {
-    res.format({
-      'application/json' : function() {
-        res.json(value);
-      }
+    let ville = req.params.ville;
+    let etat = req.params.etat;
+    var info_ville = script_state.init(ville, etat);
+    info_ville.then((value) => {
+      res.format({
+        'application/json' : function() {
+          res.json(value);
+        }
+      })
     })
-
-  });
 })
+
+
+app.get("*", function(req, res){
+  res.sendFile(__dirname + "/public/index.html")
+  alert("Erreur 404")
+  });
+
+
 
 app.get("/etat/:etat", function(req, res){
     let state = req.params.etat;
