@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>USA Covid-19</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css">
+      <link rel="stylesheet" href="scribbler-global.css">
+      <link rel="stylesheet" href="scribbler-landing.css">
+      <link rel="author" href="humans.txt">
+  </head>
+  <body>
+    <nav>
+      <div class="logo"></div>
+      <ul class="menu">
+        <div class="menu__item toggle"><span></span></div>
+        <li class="menu__item"><a href="https://github.com/theo-oriol/coursUM320202021-M2" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
+      </ul>
+    </nav>
+    <div class="hero">
+      <h1 class="hero__title">USA Covid-19 day by day</h1>
+      <p class="hero__description">The last Covid-19 data</p>
+    </div>
+    <div class="hero__terminal">
+      <pre>
+        <!-- Place your demo code here -->
+        <code class="shell-session demo">yourcomputer ~ $ </code>
+      </pre>
+    </div>
+    <div class="wrapper">
+      <div class="feature">
+        <div class="feature__item">
+          <h3 class="section__title">/state_list</h3>
+          <p>Send a json of the state list you can use. It also send the state id.</p>
+        </div>
+        <div class="feature__item">
+          <h3 class="section__title">/etat/:etat</h3>
+          <p>Send a json of the covid informations for each state and return the demographic informations for each city
+          in this state</p>
+        </div>
+        <div class="feature__item">
+          <h3 class="section__title">/etat/:etat/ville/:ville</h3>
+          <p>Send a json of the covid informations for the state of the city and return it demographic informations</p>
+        </div>
+      </div>
+    </div>
+    <div class="changelog">
+      <div class="wrapper">
+        <h3 class="section__title">Changelog</h3>
+        <div class="changelog__item">
+          <div class="changelog__meta">
+            <h4 class="changelog__title">v2</h4>
+            <small class="changelog__date">04/11/2020</small>
+          </div>
+          <div class="changelog__detail">
+            <ul>
+              <li>Define routes for our Api</li>
+              <li>Improve loading time for city informations</li>
+              <li>Debug functions</li>
+            </ul>
+          </div>
+        </div>
+        <div class="changelog__item">
+          <div class="changelog__meta">
+            <h4 class="changelog__title">v1</h4>
+            <small class="changelog__date">03/11/2020</small>
+          </div>
+          <div class="changelog__detail">
+            <ul>
+              <li>Merge covid info and global info by city</li>
+            </ul>
+          </div>
+        </div>
+        <div class="changelog__item">
+          <div class="changelog__meta">
+            <h4 class="changelog__title">v0</h4>
+            <small class="changelog__date">02/11/2020</small>
+          </div>
+          <div class="changelog__detail">
+            <ul>
+              <li>Send USA states and city info</li>
+              <li>Send USA Covid-19 info</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">Nice Api</a></footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="scribbler.js"></script>
+  </body>
+</html>
