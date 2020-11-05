@@ -5,6 +5,7 @@ var app = express();
 var fetch = require('node-fetch');
 var https = require('https');
 
+app.use(express.static("public"));
 
 var script_state = require('./js/script_state.js');
 var root_state_covid = require('./js/root_state_covid.js');
@@ -12,10 +13,6 @@ var state_list = require('./js/data.js');
 
 const port = process.env.PORT || 3000 ;
 
-// Gestion des routes
-app.get("/", function(req, res){
-    res.sendFile(__dirname + '/index.html');
-})
 
 app.get("/etat/:etat/ville/:ville", function(req, res){
   let ville = req.params.ville;
@@ -44,20 +41,20 @@ app.get("/etat/:etat", function(req, res){
       });
 })
 
-app.get("/current_covid", function(req, res){
-    let url = "https://api.covidtracking.com/v1/states/current.json";
-    fetch(url)
-      .then(res => res.json())
-      .then(json => {
+// app.get("/current_covid", function(req, res){
+//     let url = "https://api.covidtracking.com/v1/states/current.json";
+//     fetch(url)
+//       .then(res => res.json())
+//       .then(json => {
 
-        res.format({
-          'text/html' : function() {
-           res.json(json);
-          }
-        })
+//         res.format({
+//           'text/html' : function() {
+//            res.json(json);
+//           }
+//         })
 
-      });
-})
+//       });
+// })
 
 app.get("/state_list", function(req, res){
     res.format({
