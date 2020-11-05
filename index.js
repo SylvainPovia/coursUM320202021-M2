@@ -35,10 +35,6 @@ app.get("/etat/:etat/ville/:ville", function(req, res){
 })
 
 
-app.get("*", function(req, res){
-  res.redirect("/")
-  alert("Bad request, 404 error")
-  });
 
 
 
