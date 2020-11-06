@@ -8,7 +8,7 @@ var alert = require('alert')
 const cors = require('cors')
 
 var corsOptions = {
-  origin: ['http://localhost:3000', 'https://theo-oriol.github.io/coursUM320202021-M2/'],
+  origin: ['http://localhost:3000', 'https://theo-oriol.github.io/coursUM320202021-M2/', 'localhost'],
   optionsSuccessStatus: 200 // For legacy browser support
 }
 
