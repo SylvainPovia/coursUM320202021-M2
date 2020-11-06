@@ -34,10 +34,6 @@ app.get("/etat/:etat/ville/:ville", function(req, res){
     })
 })
 
-
-
-
-
 app.get("/etat/:etat", function(req, res){
     let state = req.params.etat;
     var info_state = root_state_covid.root_state_covid(state);
@@ -58,6 +54,11 @@ app.get("/state_list", function(req, res){
       }
     })
 })
+
+app.get('/rdf', function(req, res){
+    res.contentType('application/xml');
+    res.sendFile(__dirname + '/rdf/nice_rdf.xml');
+});
 
 app.get("*", function(req, res){
   res.sendFile(__dirname + "/public/index.html")
