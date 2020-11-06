@@ -34,7 +34,7 @@ var init = async function init(ville, etat){
   info_villes[full_name] = {}
   temp = get_json_covid_info.filter(function(item){return item.state == state_id;})[0]
   info_villes[full_name] = {"state":temp["state"], "date":temp["date"], "death":temp["death"], 
-                            "positive":temp["positive"], "totalTestResultsSource":temp["positive"],
+                            "positive":temp["positive"], temp:temp["negtive"], "totalTestResultsSource":temp["positive"],
                             "hospitalizedCurrently":temp["hospitalizedCurrently"]}
   
   
