@@ -68,7 +68,11 @@ app.get("/etat/:etat/ville/:ville.:format?", function(req, res){
     })
 })
 
+<<<<<<< HEAD
 app.get("/etat/:etat.:format?", function(req, res){
+=======
+app.get("/etat/:etat", function(req, res){
+>>>>>>> d2b9953086413c5d289a6e4d6f5281cf5a047998
     let state = req.params.etat;
     var info_state = root_state_covid.root_state_covid(state);
     info_state.then((value) => {
@@ -128,6 +132,7 @@ app.get("/state_list.:format?", function(req, res){
     })
 })
 
+<<<<<<< HEAD
 
 app.get(/^.*?(?:\.([^\.\/]+))?$/, function(req, res) {
   req.negotiate(req.params[0], {
@@ -139,6 +144,16 @@ app.get(/^.*?(?:\.([^\.\/]+))?$/, function(req, res) {
           res.sendFile(__dirname + "/public/index.html")
           alert("Error 404, Not Found")
       }
+=======
+app.get('/rdf', function(req, res){
+    res.contentType('application/xml');
+    res.sendFile(__dirname + '/rdf/nice_rdf.xml');
+});
+
+app.get("*", function(req, res){
+  res.sendFile(__dirname + "/public/index.html")
+  alert("Bad request, Erreur 404")
+>>>>>>> d2b9953086413c5d289a6e4d6f5281cf5a047998
   });
 });
 

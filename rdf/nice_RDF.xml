@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+
+<rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:dc="https://www.dublincore.org/specifications/dublin-core/usageguide/2005-11-07/elements/"
+  >
+
+  <!--Définition des classes-->
+
+  <!--Class Etat -->
+  <rdfs:Class rdf:about="mondomain/rdfvocabulary#Etat">
+    <rdfs:label xml:lang="en">Etat</rdfs:label>
+    <rdfs:comment xml:lang="fr">Un Etat des Etats-Unis</rdfs:comment>
+  </rdfs:Class>
+
+  <!--Class ZoneUrbaine -->
+  <rdfs:Class rdf:about="mondomain/rdfvocabulary#ZoneUrbaine">
+    <rdfs:label xml:lang="en">ZoneUrbaine</rdfs:label>
+    <rdfs:comment xml:lang="fr">Une ZoneUrbaine dans un Etat des Etats-Unis</rdfs:comment>
+  </rdfs:Class>
+
+  <!--Class Ville -->
+  <rdfs:Class rdf:about="mondomain/rdfvocabulary#Ville">
+    <rdfs:label xml:lang="en">Ville</rdfs:label>
+    <rdfs:comment xml:lang="fr">Une Ville dans une ZoneUrbaine dans un Etat des Etats-Unis</rdfs:comment>
+  </rdfs:Class>
+
+  <!--Définition des propriétés-->
+
+  <!-- relation Etat-->
+
+  <!-- relation Etat vers Ville-->
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasVille" rdfs:label="hasVille" rdfs:comment="Pour un etat sa liste de ville ">
+    <rdfs:domain rdf:resource="#Etat" />
+    <rdfs:range rdf:resource="mondomain/rdfvocabulary#Ville" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <!-- relation Etat vers ces literaux-->
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasName" rdfs:label="hasName" rdfs:comment="Le nom de l'état">
+    <rdfs:domain rdf:resource="#Etat" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasNegative" rdfs:label="hasNegative" rdfs:comment="Le nombre de cas négatif au covid 19 pour l’état">
+    <rdfs:domain rdf:resource="#Etat" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasPositive" rdfs:label="hasPositive" rdfs:comment="Le nombre de cas positif au covid 19pour l’état">
+    <rdfs:domain rdf:resource="#Etat" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasDeath" rdfs:label="hasDeath" rdfs:comment="Le nombre de morts dû au covid 19 pour l’état">
+    <rdfs:domain rdf:resource="#Etat" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hastotalTestResultSource" rdfs:label="hastotalTestResultSource " rdfs:comment="Le nombre de test au covid 19 pour l’état">
+    <rdfs:domain rdf:resource="#Etat" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hashospitalized" rdfs:label="hashospitalized" rdfs:comment="Le nombre d'hospitalisation du au covid 19 pour l’état">
+    <rdfs:domain rdf:resource="#Etat" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <!-- relation Ville vers Zone Urbaine-->
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasZoneUrbaine" rdfs:label="hasZoneUrbaine" rdfs:comment="Pour une ville sa zone urbaine ">
+    <rdfs:domain rdf:resource="#Ville" />
+    <rdfs:range rdf:resource="mondomain/rdfvocabulary#Ville" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <!-- relation Ville vers ces literaux-->
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasName" rdfs:label="hasName" rdfs:comment="Le nom de la ville">
+    <rdfs:domain rdf:resource="#Ville" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasPopulation" rdfs:label="hasPopulation" rdfs:comment="La population de la ville">
+    <rdfs:domain rdf:resource="#Ville" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <!-- relation Zone Urbaine vers ces literaux-->
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasHousing" rdfs:label="hasHousing" rdfs:comment="Indicateur Housing de la zone urbaine (note sur 10)">
+    <rdfs:domain rdf:resource="#ZoneUrbaine" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasCostofLiving" rdfs:label="hasCostofLiving" rdfs:comment="Indicateur Cost of Living de la zone urbaine (note sur 10)">
+    <rdfs:domain rdf:resource="#ZoneUrbaine" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasStartups" rdfs:label="hasStartups" rdfs:comment="Indicateur Startupsde la zone urbaine (note sur 10)">
+    <rdfs:domain rdf:resource="#ZoneUrbaine" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasVentureCapital" rdfs:label="hasVentureCapital" rdfs:comment="Indicateur Venture Capital de la zone urbaine (note sur 10)">
+    <rdfs:domain rdf:resource="#ZoneUrbaine" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasTravelConnectivity" rdfs:label="hasTravelConnectivity" rdfs:comment="Indicateur Travel Connectivity de la zone urbaine (note sur 10)">
+    <rdfs:domain rdf:resource="#ZoneUrbaine" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasCommute" rdfs:label="hasCommute" rdfs:comment="Indicateur Commute de la zone urbaine (note sur 10)">
+    <rdfs:domain rdf:resource="#ZoneUrbaine" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasBusinessFreedom" rdfs:label="hasBusinessFreedom" rdfs:comment="Indicateur Business Freedom de la zone urbaine (note sur 10)">
+    <rdfs:domain rdf:resource="#ZoneUrbaine" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasSafety" rdfs:label="hasSafety" rdfs:comment="Indicateur Safety de la zone urbaine (note sur 10)">
+    <rdfs:domain rdf:resource="#ZoneUrbaine" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasHealthcare" rdfs:label="hasHealthcare" rdfs:comment="Indicateur Healthcare de la zone urbaine (note sur 10)">
+    <rdfs:domain rdf:resource="#ZoneUrbaine" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasEducation" rdfs:label="hasEducation" rdfs:comment="Indicateur Education de la zone urbaine (note sur 10)">
+    <rdfs:domain rdf:resource="#ZoneUrbaine" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasEnvironmentalQuality" rdfs:label="hasEnvironmentalQuality" rdfs:comment="Indicateur Environmental Quality de la zone urbaine (note sur 10)">
+    <rdfs:domain rdf:resource="#ZoneUrbaine" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasEconomy" rdfs:label="hasEconomy" rdfs:comment="Indicateur Economy de la zone urbaine (note sur 10)">
+    <rdfs:domain rdf:resource="#ZoneUrbaine" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasTaxation" rdfs:label="hasTaxation" rdfs:comment="Indicateur Taxation de la zone urbaine (note sur 10)">
+    <rdfs:domain rdf:resource="#ZoneUrbaine" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasInternetAccess" rdfs:label="hasInternetAccess" rdfs:comment="Indicateur Internet Access de la zone urbaine (note sur 10)">
+    <rdfs:domain rdf:resource="#ZoneUrbaine" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasLeisureCulture" rdfs:label="hasLeisureCulture" rdfs:comment="Indicateur Leisure and Culture de la zone urbaine (note sur 10)">
+    <rdfs:domain rdf:resource="#ZoneUrbaine" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasTolerance" rdfs:label="hasTolerance" rdfs:comment="Indicateur Tolerance de la zone urbaine (note sur 10)">
+    <rdfs:domain rdf:resource="#ZoneUrbaine" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+  <rdf:Property rdf:about="mondomain/rdfvocabulary#hasOutdoors" rdfs:label="hasOutdoors" rdfs:comment="Indicateur Outdoors de la zone urbaine (note sur 10)">
+    <rdfs:domain rdf:resource="#ZoneUrbaine" />
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal" />
+    <rdfs:isDefinedBy rdf:resource="mondomain/rdfvocabulary" />
+  </rdf:Property>
+
+</rdf:RDF>
