@@ -31,9 +31,9 @@ var init = async function init(ville, etat){
   let get_info_ville = await fetch(url_id)
   let get_json_info_ville =  await get_info_ville.json()
   let population = get_json_info_ville["population"]
-  info_villes[full_name] = {}
+  info_villes[full_name.toLowerCase()] = {}
   temp = get_json_covid_info.filter(function(item){return item.state == state_id;})[0]
-  info_villes[full_name] = {"state":temp["state"], "date":temp["date"], "death":temp["death"], 
+  info_villes[full_name.toLowerCase()] = {"state":temp["state"], "date":temp["date"], "death":temp["death"], 
                             "positive":temp["positive"], temp:temp["negtive"], "totalTestResultsSource":temp["positive"],
                             "hospitalizedCurrently":temp["hospitalizedCurrently"]}
   
@@ -47,16 +47,16 @@ var init = async function init(ville, etat){
 
     for (var var_info in stats_ville) {
       name = stats_ville[var_info].name
-      info_villes[full_name][name] = stats_ville[var_info].score_out_of_10
+      info_villes[full_name.toLowerCase()][name] = stats_ville[var_info].score_out_of_10
     }
 
-    info_villes[full_name]["prefixe"] = state_id
-    info_villes[full_name]["population"] = population
+    info_villes[full_name.toLowerCase()]["prefixe"] = state_id
+    info_villes[full_name.toLowerCase()]["population"] = population
 
     }
 
-      info_villes[full_name]["prefixe"] = state_id;
-      info_villes[full_name]["population"] = population;
+      info_villes[full_name.toLowerCase()]["prefixe"] = state_id;
+      info_villes[full_name.toLowerCase()]["population"] = population;
 
   console.log("fini")
   return info_villes
