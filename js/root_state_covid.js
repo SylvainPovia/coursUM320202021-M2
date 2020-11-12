@@ -30,7 +30,7 @@ var root_state_covid = async function root_state_covid(state){
   // Boucle cities
   for(var element of get_json_ville['_links']['city:items']){
     //let full_name = element.name
-    info_state[state_id]['cities'].push(element.name)
+    info_state[state_id]['cities'].push(element.name.toLowerCase())
     continue
   }
 
