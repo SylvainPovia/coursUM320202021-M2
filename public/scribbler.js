@@ -12,7 +12,7 @@ var getAll = function (selector, scope) {
 // setup typewriter effect in the terminal demo
 if (document.getElementsByClassName('demo').length > 0) {
   var i = 0;
-  var txt = `curl https://server-node-api.herokuapp.com/etat/Alaska/ville/Juneau
+  var txt = `curl https://server-node-api.herokuapp.com/etat/Alaska/ville/Juneau.json
 
   result :
 

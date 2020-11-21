@@ -25,6 +25,8 @@
     "fetch": "^1.1.0",
     "filter": "^0.1.1",
     "node-fetch": "^2.6.1",
-    "redirect": "^0.2.0"
+    "redirect": "^0.2.0",
+    "request": "^2.88.2",
+    "window": "^4.2.7"
   }
 }
