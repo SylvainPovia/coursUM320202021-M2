@@ -1,59 +1,28 @@
-# coursUM320202021-M2
+# Nice API
 
-# Descriptif du projet
-Par groupes de 5 : développer un serveur node.js hébergé sur heroku qui fournit un jeu de données produit par le croisement d'au moins de jeux de données récupérés sur le Web. Le code projet sera hébergé sur github en fork de ce projet support de cours.
-Vous fournirez dans le README de votre projet :
-* explication du choix des sources de données et de comment vous les utilisez ( quelles requêtes vous faites )
-* comment vous liez les données entre elles
-Vous fournirez également votre API de sortie :
-* quelles URL proposées par votre serveur permettent de récupérer quelles données
-* les données devront être accessibles dans au moins deux formats ( JSON et RDF ) et votre API devra respecter les principes de la négoctiation de contenu server-driven
-Il faudra que vos données soient bien ouvertes c'est à dire format explicite, données complètes, et facilement accessiibles ( politique CORS permissive ).
+- Liens heroku : https://server-node-api.herokuapp.com/
 
+# Présentation du groupe
 
-Vous proposerez une interface cliente ( codes HTML JS client ) hébergée en githubpage consommatrice de votre API.
+Le goupe est composé de :
 
-Vous serez évalués sur : la qualité du code,la pertinence du jeu de données, la pertinence des choix de sources de données, la pertinence de la solution de jointure entre les jeux de données, votre bon usage de github et des pull request.
+- Arthur GUICQUIAUD (arthur.gicquiaud@gmail.com)
+- Joseph AKABROU (Joakabrou@gmail.com)
+- Théo ORIOL (theo.oriol@lilo.org)
+- Sylvain POVIA (syl.povia@gmail.com)
+- Clément CISTERNE (crc.company.6@gmail.com)
 
+# Nice API ? C'est quoi ?
 
-# OpenData
+Nice API est issue de la volonté de mieux comprendre le comportement et l'évolution de l'épidémie de covid 19 aux Etats-Unis. En croisant les données covid 19 pour chaque état comme le nombre de cas négatif recensé, avec des indices sociétales comme (exemples). Ainsi, Nice API propose : 
+- Un service de pipe http pour utiliser le croisement des dernières données covid 19 de chaques etats des Etats-Unis avec leurs indices sociétales
+- Une page web qui utilise ces données et donne un exemple de visualisations claires et intuitives issuent de l'API.
 
-C'est quoi ? Le fait d'ouvrir ses données. Mais il y a des niveaux de qualité dans l'ouverture des données : faciles d'accès, bien structurées, modèle explicite, droit légal de réutilisation.
+# Nos données
+Pour mener à bien ce projet, nous avons consacré une bonne journée à la recherche d'API web fournissant les données de la Covid-19(par ville dans un premier temps). Malheuresement, nous n'avons pas trouvé cette information. En revanche, nous avons trouvé une api qui permet de récupérer les données de covid par état. Cette api, disponible via le lien suivant, ..., nous a permis d'accéder à de vastes informations sur la covid-19 pour un état.
 
+En parralèle de cette source d'information, nous avons également trouvé une autre API qui elle fourni des données économique et démographique ville par ville au Etat Unis. Très rapidement, nous avons pu établir un lien entre une ville et son état. C'est là que nous est venu l'idée de proposer les données de Covid par état, puis de présenter les données démographique et économique des villes localisées dans l'état.
 
-Quelles sont les motivations ? notamment le partage de données entre scientifiques, dans le prolongement de ce pour quoi le Web et avant ça internet ont été créés. Ca rejoint la volonté de l'article As We May Think de Vanevar Bush en 1945. Mais aussi une demande citoyenne pour rendre public les données des administrations dans un contexte de démocratie et une volonté de transparence.
-1. partage de grandes bases de données pour développement d’applications tierces
-2. rendre les données aux producteurs de données
-3. transparence sur les données produites
-
-10 principes fondateurs ( plus ou moins respectés )
-1. complètes,
-2. primaires,
-3. fraîches,
-4. accessibles,
-5. électroniquement lisibles par une machine,
-6. accessibles sans discrimination,
-7. disponibles sous des formats ouverts,
-8. disponibles sous licences ouvertes,
-9. accessibles de façon pérenne en ligne,
-10. sans coût d’utilisation.
-
-# Echelle de qualité des données ouvertes (Tim Berners-Lee)
-★ Données non filtrées « dégradées », quel que soit leur format
-
-★ ★ Données disponibles en formats structurés (tabulaires en CSV, XML, Excel, RDF)
-
-★ ★ ★ Données libres d’être exploitées juridiquement (licences) et techniquement dans des formats non propriétaires
-
-★ ★ ★ ★ Données accessibles via des URL afin de pouvoir pointer dessus
-
-★ ★ ★ ★ ★ Données liées à d’autres données pour les contextualiser et les enrichir.
-
-#La loi Lemaire
-
-l’administration (ministères, collectivités territoriales, établissements publics...) sera dorénavant tenue, lorsqu’elle communique un document administratif au format électronique, de le mettre à disposition du citoyen « dans un standard ouvert, aisément réutilisable et exploitable par un système de traitement automatisé ». Ce droit de réutilisation vaut également pour les documents administratifs divulgués par les acteurs privés chargés d'une mission de service public à caractère industriel ou commercial. Si vous voulez des données de l’administration qui ne sont pas déjà ouvertes, il faut les demander à l’administration, si elle ne les fournit pas, vous pouvez demander au CADA  ( Commission d’Accès aux Documents Administratifs ) qui peut imposer à l’administration de vous les ouvrir … mais sous combien de temps ? La loi date de octobre 2016 et ne sera pleinement applicable que fin 2018.
-
-
-Liens heroku : https://server-node-api.herokuapp.com/
+--- 
 
 

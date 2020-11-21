@@ -33,12 +33,15 @@
     <div class="wrapper">
       <div class="feature" margin="auto">
         <div class="feature__item">
-          <h3 class="section__title">/etat/:etat</h3>
-          <p>Send a json of the covid informations for each state and return the cities in the state</p>
+          <h3 class="section__title">/etat/:etat.:format?</h3>
+          <p>Send a json of the covid informations for each state and return the cities in the state.
+            You must provide the format you want, .xml download an xml+rdf file and .json send you a json file.
+          </p>
         </div>
         <div class="feature__item">
-          <h3 class="section__title">/etat/:etat/ville/:ville</h3>
-          <p>Send a json of the covid informations for the state of the city and return it demographic informations</p>
+          <h3 class="section__title">/etat/:etat/ville/:ville.:format?</h3>
+          <p>Send a json of the covid informations for the state of the city and return it demographic informations.The same here, you have to precise the format you want between xml(xml+rdf) and json.
+          </p>
         </div>
       </div>
     </div>
