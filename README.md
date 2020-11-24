@@ -67,9 +67,24 @@ Pour finir, nous avons la route qui permet d'atteindre la dernière granularité
 - /etat/:etat/ville/:ville.:format?
 
 ## La gestion des erreurs
-Pour les deux routes que nous avons construit, nous avons géré les erreurs. Autrement dit, si vous entrez un mauvais nom d'état, où un mauvais nom de ville, l'API vous le fera savoir.
+La gestion des erreurs a été un point marquant de notre travail. En effet, avant de la mettre en place, chaque fois que l'on entrait une mauvaise route, l'API chargait indéfiniemment. Pour palier cela, nous avons construit un filtre qui s'appuie sur les paramètres de ville et etat qui sont demandé. Ce filtre nous permet de savoir si vous entrez un mauvais nom d'état, où un mauvais nom de ville. Dans ce cas, l'API vous le fera savoir et ne mettra pas X temps à charger quelque chose qui n'existe pas.
 
-De même, nous avons également construit une route dans le cas où l'erreur concerne un lien qui n'a aucun rapport avec l'une des routes dont nous avons parlé précedemment
+De même, nous avons également construit une route dans le cas où l'erreur concerne un lien qui n'a aucun rapport avec l'une des routes dont nous avons parlé précedemment. Autrement dit, si un utilisateur demande un accès à des données qui n'existe pas dans nos chemin prédéfini, notre API le fera savoir. Voici un apercu du code de cette route. Dans cet apercu, vous pouvez voir comment nous avons mis en place notre négociation de contenu. Pour chaque route que nous avons, ,ous avons défini un contenu à renvoyer dépendamment des attentes des utilisateurs et/ou des possibilité des navigateurs.
+
+```javascript
+app.get(/^.*?(?:\.([^\.\/]+))?$/, function(req, res) {
+  req.negotiate(req.params[0], {
+        'json;q=0.9': function() {
+          res.send({ error: 404, message: 'Not Found' }, 404);
+      }
+      , 'html;q=1.1,default': function() {
+          res.statusCode = 404;
+          res.sendFile(__dirname + "/public/index.html")
+          alert("Error 404, Not Found")
+      }
+  });
+});
+```
 ## Le fichier de description xml+rdf 
 
 # Notre site consommateur de l'Api
