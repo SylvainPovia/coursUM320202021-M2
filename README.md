@@ -26,11 +26,12 @@ En parralèle à cette source d'information, nous avons également trouvé une a
 ## Notre méthode pour accéder aux données
 Pour accéder au données, nous utilisons une requête GET via la fonction fetch que propose javascript. Pour simplifier notre usage des données, nous avons préféré les récupérer au format json. Cependant d'autres format étaient disponible. Voici ci-dessous un exemple de requête que nous avons fait  : 
 
-// Données démographique <br>
-<script> let url = "https://api.teleport.org/api/countries/iso_alpha2%3AUS/admin1_divisions/geonames%3A"+state_id+"/cities/"; </script> <br>
-let get_name_ville = await fetch(url); <br>
-let get_json_ville =  await get_name_ville.json() <br>
-
+```javascript
+// Données démographique 
+let url = "https://api.teleport.org/api/countries/iso_alpha2%3AUS/admin1_divisions/geonames%3A"+state_id+"/cities/"; 
+let get_name_ville = await fetch(url); 
+let get_json_ville =  await get_name_ville.json() 
+```
 ## Le lien entre les données
 Comme présenté précedemment, il existe un lien évident entre une ville au état unis et l'état dans lequel se situe cette ville. Pour chaque ville, nous avons identifié le nom de l'état dans les données économique/démographique. Pour chaque ville que l'on recherche dans l'api des données économiques/démographiques, on récupère également le code de l'état dans lequelle cette ville est située. Suite à cette découverte, nous avons regardé de près les options que propose l'API. C'est ainsi que nous avons découvert qu'il était possible d'avoir la liste des villes localisé dans un état.
 
