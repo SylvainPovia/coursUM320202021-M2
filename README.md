@@ -27,7 +27,7 @@ En parralèle à cette source d'information, nous avons également trouvé une a
 Pour accéder au données, nous utilisons une requête GET via la fonction fetch que propose javascript. Pour simplifier notre usage des données, nous avons préféré les récupérer au format json. Cependant d'autres format étaient disponible. Voici ci-dessous un exemple de requête que nous avons fait  : 
 
 // Données démographique <br>
-let url = "https://api.teleport.org/api/countries/iso_alpha2%3AUS/admin1_divisions/geonames%3A"+state_id+"/cities/"; <br>
+<script> let url = "https://api.teleport.org/api/countries/iso_alpha2%3AUS/admin1_divisions/geonames%3A"+state_id+"/cities/"; </script> <br>
 let get_name_ville = await fetch(url); <br>
 let get_json_ville =  await get_name_ville.json() <br>
 
