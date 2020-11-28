@@ -87,7 +87,11 @@ app.get(/^.*?(?:\.([^\.\/]+))?$/, function(req, res) {
 ```
 ## Le fichier de description xml+rdf
 
+### Diagramme de classe
 ![MCD covid state USA](https://github.com/theo-oriol/coursUM320202021-M2/blob/clem2/rdf/img/MCD%20open%20data%20covid%20USA.png)
+
+### Schéma du vocabulaire RDF
+![Vocabulary RDF covid state USA](https://github.com/theo-oriol/coursUM320202021-M2/blob/clem2/rdf/img/RDF%20open%20data%20covid%20USA.png)
 
 # Notre site consommateur de l'Api
 
