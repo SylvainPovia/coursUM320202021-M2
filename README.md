@@ -14,6 +14,7 @@ Le goupe est composé de :
 
 # Nice API ? C'est quoi ?
 
+
 Nice API est issue de la volonté de mieux comprendre le comportement et l'évolution de l'épidémie de covid 19 aux Etats-Unis. En croisant les données covid 19 pour chaque état comme le nombre de cas négatif recensé, avec des indices sociétales comme (exemples). Ainsi, Nice API propose : 
 - Un service de pipe http pour utiliser le croisement des dernières données covid 19 de chaque etats des États-Unis avec leurs indices sociétaux
 - Une page web qui utilise les données citées précedemment pour donner un comparatif de deux villes aux États-Unis.
@@ -27,10 +28,10 @@ En parralèle à cette source d'information, nous avons également trouvé une A
 Pour accéder aux données, nous utilisons une requête GET via la fonction fetch que propose le langage JavaScript. Pour simplifier notre usage des données, nous avons préféré les récupérer au format json. Cependant d'autres format sont disponibles. Voici ci-dessous un exemple le format d'une requête que nous avons employée  : 
 
 ```javascript
-// Données démographique 
-let url = "https://api.teleport.org/api/countries/iso_alpha2%3AUS/admin1_divisions/geonames%3A"+state_id+"/cities/"; 
-let get_name_ville = await fetch(url); 
-let get_json_ville =  await get_name_ville.json() 
+// Données démographique
+let url = "https://api.teleport.org/api/countries/iso_alpha2%3AUS/admin1_divisions/geonames%3A"+state_id+"/cities/";
+let get_name_ville = await fetch(url);
+let get_json_ville =  await get_name_ville.json()
 ```
 ## Le lien entre les données
 Comme présenté précedemment, il existe un lien évident entre une ville au  États-Unis et l'état dans lequel se situe cette ville. En effet, dans les données économique/démographique, le code de l'état de la ville est mentionné. Autrement dit, pour chaque ville que l'on recherche dans l'API des données économiques/démographiques, on récupère également le code de l'état dans lequelle cette ville est située. Inversement, dans cette même api, il est possible d'avoir la liste des villes localisées dans un état.
@@ -47,23 +48,23 @@ De cette manière, on peut regarder les données de manière globale, pour ensui
 Pour chaque données que nous proposons via notre API, nous avons deux format disponible 
   - json 
   - xml+rdf
-  
+
 Pour simplifier l'accès à ces format, nous avons intégrer le format de données recherché dans le liens vers les données. Ainsi, pour chaque routes vers lesquelles vous allé pointer, votre appel doit se terminer par .json dans le cas ou vous souhaiter récupérer du json, et .xml dans le cas ou vous préférer télécharger un fichier .rdf
 ## Les liens
 
-Afin de simplifier l'utilisation de notre api, nous avons créée un jeu de données qui liste les états des états - unis. Cela permet de voir les états que l'on peut rechercher dans notre api. Une fois que l'on recherche un état, on peut regarder ses données covid et voir la liste des villes présentent dans cet état. 
+Afin de simplifier l'utilisation de notre api, nous avons créée un jeu de données qui liste les états des états - unis. Cela permet de voir les états que l'on peut rechercher dans notre api. Une fois que l'on recherche un état, on peut regarder ses données covid et voir la liste des villes présentent dans cet état.
 La liste des état présent dans l'API constitue notre prmière route. C'est une route qui ne sert qu'à connaitre ce qui est recherchable dans notre API.
 
-Cette route est accessible via le lien suivant : 
+Cette route est accessible via le lien suivant :
 - /state_list.:format?
 Comme mentionné précédemment, vous devez donc renseigner le format désiré.
 
 Ensuite, nous avons la route qui renvoi des données de covid pour un état ainsi que la liste des villes présentent dans cet état.
 
-Cette route est accessible via le lien suivant : 
+Cette route est accessible via le lien suivant :
 - /etat/:etat.:format?
 
-Pour finir, nous avons la route qui permet d'atteindre la dernière granularité, c'est à dire celle de la ville dans un état. Cette dernière est disponible au lien suivant : 
+Pour finir, nous avons la route qui permet d'atteindre la dernière granularité, c'est à dire celle de la ville dans un état. Cette dernière est disponible au lien suivant :
 - /etat/:etat/ville/:ville.:format?
 
 ## La gestion des erreurs
@@ -85,14 +86,16 @@ app.get(/^.*?(?:\.([^\.\/]+))?$/, function(req, res) {
   });
 });
 ```
-## Le fichier de description xml+rdf 
+## Le fichier de description xml+rdf
+
+### Diagramme de classe
+![MCD covid state USA](https://github.com/theo-oriol/coursUM320202021-M2/blob/clem2/rdf/img/MCD%20open%20data%20covid%20USA.png)
+
+### Schéma du vocabulaire RDF
+![Vocabulary RDF covid state USA](https://github.com/theo-oriol/coursUM320202021-M2/blob/clem2/rdf/img/RDF%20open%20data%20covid%20USA.png)
 
 # Notre site consommateur de l'Api
 
 
 - Lien direct vers le site web : https://theo-oriol.github.io/API-access.io/
---- 
-
-
-
-
+---
