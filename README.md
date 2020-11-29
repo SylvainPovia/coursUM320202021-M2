@@ -15,16 +15,16 @@ Le goupe est composé de :
 # Nice API ? C'est quoi ?
 
 Nice API est issue de la volonté de mieux comprendre le comportement et l'évolution de l'épidémie de covid 19 aux Etats-Unis. En croisant les données covid 19 pour chaque état comme le nombre de cas négatif recensé, avec des indices sociétales comme (exemples). Ainsi, Nice API propose : 
-- Un service de pipe http pour utiliser le croisement des dernières données covid 19 de chaques etats des Etats-Unis avec leurs indices sociétales
-- Une page web qui utilise ces données et donne un exemple de visualisations claires et intuitives issuent de l'API.
+- Un service de pipe http pour utiliser le croisement des dernières données covid 19 de chaque etats des États-Unis avec leurs indices sociétaux
+- Une page web qui utilise les données citées précedemment pour donner un comparatif de deux villes aux États-Unis.
 
 # Nos données
-Pour mener à bien ce projet, nous avons consacré une bonne journée à la recherche d'API web fournissant les données de la Covid-19(par ville dans un premier temps). Malheuresement, nous n'avons pas trouvé cette information. En revanche, nous avons trouvé une api qui permet de récupérer les données de covid par état. Cette api, (disponible via le lien suivant : https://covidtracking.com/data/api) nous a permis d'accéder à de vastes informations sur la covid-19 pour chaque état.
+Pour mener à bien ce projet, nous avons consacré une bonne journée à la recherche d'API web fournissant les données de la Covid-19(par ville dans un premier temps). Malheuresement, nous n'avons pas trouvé cette information. Avec le temps, nous avons finalement trouvé une API qui fournit les données de covid <b>par état</b>. Cette api, (disponible via le lien suivant : https://covidtracking.com/data/api) nous a permis d'accéder à de vastes informations sur la covid-19 pour chaque état.
 
-En parralèle à cette source d'information, nous avons également trouvé une autre API (disponible via le lien suivant : https://developers.teleport.org/api/) qui fourni des données économique et/ou démographique pour chaque ville au Etat Unis. Très rapidement, nous avons pu établir un lien possible entre une ville et son état. C'est là que nous est venu l'idée de proposer les données de Covid par état, puis de présenter les données démographique et économique des villes localisées dans l'état. 
+En parralèle à cette source d'information, nous avons également trouvé une API (disponible via le lien suivant : https://developers.teleport.org/api/) qui fourni des données économiques et/ou démographiques de chaque ville. Très rapidement, nous avons identifier un lien direct entre une ville et son état. C'est là que nous est venu l'idée de proposer les données de Covid par état, puis de présenter les données démographiques et économiques des villes localisées dans cet état. 
 
 ## Notre méthode pour accéder aux données
-Pour accéder au données, nous utilisons une requête GET via la fonction fetch que propose javascript. Pour simplifier notre usage des données, nous avons préféré les récupérer au format json. Cependant d'autres format étaient disponible. Voici ci-dessous un exemple de requête que nous avons fait  : 
+Pour accéder aux données, nous utilisons une requête GET via la fonction fetch que propose le langage JavaScript. Pour simplifier notre usage des données, nous avons préféré les récupérer au format json. Cependant d'autres format sont disponibles. Voici ci-dessous un exemple le format d'une requête que nous avons employée  : 
 
 ```javascript
 // Données démographique 
@@ -33,10 +33,10 @@ let get_name_ville = await fetch(url);
 let get_json_ville =  await get_name_ville.json() 
 ```
 ## Le lien entre les données
-Comme présenté précedemment, il existe un lien évident entre une ville au état unis et l'état dans lequel se situe cette ville. Pour chaque ville, nous avons identifié le nom de l'état dans les données économique/démographique. Pour chaque ville que l'on recherche dans l'api des données économiques/démographiques, on récupère également le code de l'état dans lequelle cette ville est située. Suite à cette découverte, nous avons regardé de près les options que propose l'API. C'est ainsi que nous avons découvert qu'il était possible d'avoir la liste des villes localisé dans un état.
+Comme présenté précedemment, il existe un lien évident entre une ville au  États-Unis et l'état dans lequel se situe cette ville. En effet, dans les données économique/démographique, le code de l'état de la ville est mentionné. Autrement dit, pour chaque ville que l'on recherche dans l'API des données économiques/démographiques, on récupère également le code de l'état dans lequelle cette ville est située. Inversement, dans cette même api, il est possible d'avoir la liste des villes localisées dans un état.
 
-Cela nous as permit de proposer une première route pour notre API : 
-- Les données de covid-19 pour un état accompagnées de la liste des villes de cet état.
+Cela nous a permit de proposer une première route pour notre API : 
+- Les données de covid-19 d'un état donné, accompagnées de la liste des villes de cet état.
 
 De cette manière, on peut regarder les données de manière globale, pour ensuite s'intéresser de près à une ville en particulier si on le désire. C'est justement cela que propose notre seconde route. :
 - Les données démographique/économique pour une ville dans un état, avec les données de covid de son état.
@@ -44,7 +44,7 @@ De cette manière, on peut regarder les données de manière globale, pour ensui
 # Nos routes
 
 ## La négociation de contenu
-Pour chaque données que nous proposons sur notre api, nous avons deux format disponible 
+Pour chaque données que nous proposons via notre API, nous avons deux format disponible 
   - json 
   - xml+rdf
   
@@ -67,7 +67,7 @@ Pour finir, nous avons la route qui permet d'atteindre la dernière granularité
 - /etat/:etat/ville/:ville.:format?
 
 ## La gestion des erreurs
-La gestion des erreurs a été un point marquant de notre travail. En effet, avant de la mettre en place, chaque fois que l'on entrait une mauvaise route, l'API chargait indéfiniemment. Pour palier cela, nous avons construit un filtre qui s'appuie sur les paramètres de ville et etat qui sont demandé. Ce filtre nous permet de savoir si vous entrez un mauvais nom d'état, où un mauvais nom de ville. Dans ce cas, l'API vous le fera savoir et ne mettra pas X temps à charger quelque chose qui n'existe pas.
+La gestion des erreurs a été un point marquant pour notre travail. En effet, avant de la mettre en place, chaque fois que l'on entrait une mauvaise route, l'API chargait indéfiniemment quelque chose qui n'existe pas. Pour palier cela, nous avons construit un filtre qui s'appuie sur les paramètres de ville et etat qui sont demandés. Ce filtre nous permet de savoir si vous entrez un mauvais nom d'état, où un mauvais nom de ville. Dans ce cas, l'API vous le fera savoir et ne mettra pas X temps à charger quelque chose qui n'existe pas.
 
 De même, nous avons également construit une route dans le cas où l'erreur concerne un lien qui n'a aucun rapport avec l'une des routes dont nous avons parlé précedemment. Autrement dit, si un utilisateur demande un accès à des données qui n'existe pas dans nos chemin prédéfini, notre API le fera savoir. Voici un apercu du code de cette route. Dans cet apercu, vous pouvez voir comment nous avons mis en place notre négociation de contenu. Pour chaque route que nous avons, ,ous avons défini un contenu à renvoyer dépendamment des attentes des utilisateurs et/ou des possibilité des navigateurs.
 
