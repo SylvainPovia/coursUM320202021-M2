@@ -28,19 +28,19 @@ En parralèle à cette source d'information, nous avons également trouvé une A
 Pour accéder aux données, nous utilisons une requête GET via la fonction fetch que propose le langage JavaScript. Pour simplifier notre usage des données, nous avons préféré les récupérer au format json. Cependant d'autres format sont disponibles. Voici ci-dessous un exemple le format d'une requête que nous avons employée  : 
 
 ```javascript
-// Données démographique
+// Données démographiques
 let url = "https://api.teleport.org/api/countries/iso_alpha2%3AUS/admin1_divisions/geonames%3A"+state_id+"/cities/";
 let get_name_ville = await fetch(url);
 let get_json_ville =  await get_name_ville.json()
 ```
 ## Le lien entre les données
-Comme présenté précedemment, il existe un lien évident entre une ville au  États-Unis et l'état dans lequel se situe cette ville. En effet, dans les données économique/démographique, le code de l'état de la ville est mentionné. Autrement dit, pour chaque ville que l'on recherche dans l'API des données économiques/démographiques, on récupère également le code de l'état dans lequelle cette ville est située. Inversement, dans cette même api, il est possible d'avoir la liste des villes localisées dans un état.
+Comme présenté précedemment, il existe un lien évident entre une ville au  États-Unis et l'état dans lequel se situe cette ville. En effet, dans les données économiques/démographiques, le code de l'état de la ville est mentionné. Autrement dit, pour chaque ville que l'on recherche dans l'API des données économiques/démographiques, on récupère également le code de l'état dans lequelle cette ville est située. Inversement, dans cette même api, il est possible d'avoir la liste des villes localisées dans un état.
 
 Cela nous a permit de proposer une première route pour notre API : 
 - Les données de covid-19 d'un état donné, accompagnées de la liste des villes de cet état.
 
 De cette manière, on peut regarder les données de manière globale, pour ensuite s'intéresser de près à une ville en particulier si on le désire. C'est justement cela que propose notre seconde route. :
-- Les données démographique/économique pour une ville dans un état, avec les données de covid de son état.
+- Les données démographiques/économiques pour une ville dans un état, avec les données de covid de son état.
 
 # Nos routes
 
