@@ -48,8 +48,7 @@ De cette manière, on peut regarder les données de manière globale, pour ensui
 Pour chaque données que nous proposons via notre API, nous avons deux format disponible 
   - json 
   - xml+rdf
-
-Pour simplifier l'accès à ces format, nous avons intégrer le format de données recherché dans le liens vers les données. Ainsi, pour chaque routes vers lesquelles vous allé pointer, votre appel doit se terminer par .json dans le cas ou vous souhaiter récupérer du json, et .xml dans le cas ou vous préférer télécharger un fichier .rdf
+Au cours de notre travail, nous avons eu des problèmes a proposer différents contenu via le paramètre application/xml+rdf. En effet, lorsque l'on utilisait le paramètre dans les headers de la fonction fetch, le fetch nous retournait <b>toujours</b> json. Ainsi, pour simplifier l'accès aux différents formats, nous avons intégrer le format de données recherché dans le liens vers les données. Ainsi, pour chaque routes vers lesquelles vous allé pointer, votre appel doit se terminer par .json dans le cas ou vous souhaiter récupérer du json, et .xml dans le cas ou vous préférer télécharger un fichier .rdf
 ## Les liens
 
 Afin de simplifier l'utilisation de notre api, nous avons créée un jeu de données qui liste les états des états - unis. Cela permet de voir les états que l'on peut rechercher dans notre api. Une fois que l'on recherche un état, on peut regarder ses données covid et voir la liste des villes présentent dans cet état.
