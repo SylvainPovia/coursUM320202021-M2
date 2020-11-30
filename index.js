@@ -19,6 +19,7 @@ app.use(express.static("public"), cors(corsOptions));
 var script_state = require('./js/script_state.js');
 var root_state_covid = require('./js/root_state_covid.js');
 var state_list = require('./js/data.js');
+var state_stats = require('./js/stats_data.js')
 const os = require('os');
 
 const port = process.env.PORT || 3000 ;
@@ -150,6 +151,17 @@ app.get("/state_list.:format?", function(req, res){
       }
     })
 })
+
+
+app.get("/state_stats", function(req, res){
+  var stats_info = state_stats.state_stats();
+  req.negotiate({
+    'application/json' : function() {
+      stats_info.then(function(value){res.json(value);})
+    }
+  })
+})
+
 
 
 app.get(/^.*?(?:\.([^\.\/]+))?$/, function(req, res) {
