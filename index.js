@@ -10,7 +10,7 @@ var request = require('request')
 const cors = require('cors')
 
 var corsOptions = {
-  origin: ['*'],
+  origin: '*',
   optionsSuccessStatus: 200 // For legacy browser support
 }
 
