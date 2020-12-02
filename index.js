@@ -25,9 +25,9 @@ const os = require(`os`);
 const port = process.env.PORT || 3000 ;
 
 
-app.get("/etat/:etat/ville/:ville.:format?", function(req, res){
-  let ville = req.params.ville;
-  let etat = req.params.etat;
+app.get("/state/:state/city/:city.:format?", function(req, res){
+  let ville = req.params.city;
+  let etat = req.params.state;
   var info_ville = script_state.init(ville, etat);
   info_ville.then((value) => {
     req.negotiate(req.params.format,{
@@ -82,8 +82,8 @@ app.get("/etat/:etat/ville/:ville.:format?", function(req, res){
   })
 })
 
-app.get("/etat/:etat.:format?", function(req, res){
-  let state = req.params.etat;
+app.get("/state/:state.:format?", function(req, res){
+  let state = req.params.state;
   var info_state = root_state_covid.root_state_covid(state);
   info_state.then((value) => {
     req.negotiate(req.params.format,{
@@ -162,30 +162,30 @@ app.get("/state_stats", function(req, res){
   })
 })
 
-app.get("/rdfvocabulary", function(req, res){
+app.get("/rdf_vocabulary", function(req, res){
   req.negotiate({
     "application/xml" : function() {
-      res.setHeader("Content-disposition", "attachement; filename=rdfvocabulary.rdf")
+      res.setHeader("Content-disposition", "attachement; filename=rdf_vocabulary.rdf")
       var xmlrdf = `<?xml version="1.0"?>\n`
       xmlrdf += `<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dc="https://www.dublincore.org/specifications/dublin-core/usageguide/2005-11-07/elements/">\n`    
       
       // Définition des classes
       // Class Etat 
-      xmlrdf += `\t<rdfs:Class rdf:about="${req.headers.host}/rdfvocabulary#Etat">\n`
+      xmlrdf += `\t<rdfs:Class rdf:about="${req.headers.host}/rdf_vocabulary#Etat">\n`
       xmlrdf += `\t\t<rdfs:label xml:lang="en">Etat</rdfs:label>\n`
       xmlrdf += `\t\t<rdfs:comment xml:lang="fr">Un Etat des Etats-Unis</rdfs:comment>\n`
       xmlrdf += `\t</rdfs:Class>\n`
       xmlrdf += `\n`
 
       // Class ZoneUrbaine
-      xmlrdf += `\t<rdfs:Class rdf:about="${req.headers.host}/rdfvocabulary#ZoneUrbaine">\n`
+      xmlrdf += `\t<rdfs:Class rdf:about="${req.headers.host}/rdf_vocabulary#ZoneUrbaine">\n`
       xmlrdf += `\t\t<rdfs:label xml:lang="en">ZoneUrbaine</rdfs:label>\n`
       xmlrdf += `\t\t<rdfs:comment xml:lang="fr">Une ZoneUrbaine dans un Etat des Etats-Unis</rdfs:comment>\n`
       xmlrdf += `\t</rdfs:Class>\n`
       xmlrdf += `\n`
 
       // Class Ville
-      xmlrdf += `\t<rdfs:Class rdf:about="${req.headers.host}/rdfvocabulary#Ville">\n`
+      xmlrdf += `\t<rdfs:Class rdf:about="${req.headers.host}/rdf_vocabulary#Ville">\n`
       xmlrdf += `\t\t<rdfs:label xml:lang="en">Ville</rdfs:label>\n`
       xmlrdf += `\t\t<rdfs:comment xml:lang="fr">Une Ville dans une ZoneUrbaine dans un Etat des Etats-Unis</rdfs:comment>\n`
       xmlrdf += `\t</rdfs:Class>\n`
@@ -195,201 +195,201 @@ app.get("/rdfvocabulary", function(req, res){
       // relation Etat
       // relation Etat vers Ville
       
-      xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasVille" rdfs:label="hasVille" rdfs:comment="Pour un etat sa liste de ville ">\n`
+      xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasVille" rdfs:label="hasVille" rdfs:comment="Pour un etat sa liste de ville ">\n`
       xmlrdf += `\t\t<rdfs:domain rdf:resource="#Etat" />\n`
-      xmlrdf += `\t\t<rdfs:range rdf:resource="${req.headers.host}/rdfvocabulary#Ville" />\n`
-      xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+      xmlrdf += `\t\t<rdfs:range rdf:resource="${req.headers.host}/rdf_vocabulary#Ville" />\n`
+      xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
       xmlrdf += `\t</rdf:Property>\n`
       xmlrdf += `\n`
 
       // relation Etat vers ces literaux
-      xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasName" rdfs:label="hasName" rdfs:comment="Le nom de l’état">\n`
+      xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasName" rdfs:label="hasName" rdfs:comment="Le nom de l’état">\n`
       xmlrdf += `\t\t<rdfs:domain rdf:resource="#Etat" />\n`
-      xmlrdf += `\t\t<rdfs:range rdf:resource="${req.headers.host}/rdfvocabulary#Ville" />\n`
-      xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+      xmlrdf += `\t\t<rdfs:range rdf:resource="${req.headers.host}/rdf_vocabulary#Ville" />\n`
+      xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
       xmlrdf += `\t</rdf:Property>\n`
       xmlrdf += `\n`
 
-      xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasNegative" rdfs:label="hasNegative" rdfs:comment="Le nombre de cas négatif au covid 19 pour l’état">\n`
+      xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasNegative" rdfs:label="hasNegative" rdfs:comment="Le nombre de cas négatif au covid 19 pour l’état">\n`
       xmlrdf += `\t\t<rdfs:domain rdf:resource="#Etat" />\n`
       xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-      xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+      xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
       xmlrdf += `\t</rdf:Property>\n`
       xmlrdf += `\n`
 
-      xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasPositive" rdfs:label="hasPositive" rdfs:comment="Le nombre de cas positif au covid 19pour l’état">\n`
+      xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasPositive" rdfs:label="hasPositive" rdfs:comment="Le nombre de cas positif au covid 19pour l’état">\n`
       xmlrdf += `\t\t<rdfs:domain rdf:resource="#Etat" />\n`
       xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-      xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+      xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
       xmlrdf += `\t</rdf:Property>\n`
       xmlrdf += `\n`
 
-      xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasDeath" rdfs:label="hasDeath" rdfs:comment="Le nombre de morts dû au covid 19 pour l’état">\n`
+      xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasDeath" rdfs:label="hasDeath" rdfs:comment="Le nombre de morts dû au covid 19 pour l’état">\n`
       xmlrdf += `\t\t<rdfs:domain rdf:resource="#Etat" />\n`
       xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-      xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+      xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
       xmlrdf += `\t</rdf:Property>\n`
       xmlrdf += `\n`
     
-      xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hastotalTestResultSource" rdfs:label="hastotalTestResultSource" rdfs:comment="Le nombre de test au covid 19 pour l’état">\n`
+      xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hastotalTestResultSource" rdfs:label="hastotalTestResultSource" rdfs:comment="Le nombre de test au covid 19 pour l’état">\n`
       xmlrdf += `\t\t<rdfs:domain rdf:resource="#Etat" />\n`
       xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-      xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+      xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
       xmlrdf += `\t</rdf:Property>\n`
       xmlrdf += `\n`
 
-      xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hashospitalized" rdfs:label="hashospitalized" rdfs:comment="Le nombre d’hospitalisation du au covid 19 pour l’état">\n`
+      xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hashospitalized" rdfs:label="hashospitalized" rdfs:comment="Le nombre d’hospitalisation du au covid 19 pour l’état">\n`
       xmlrdf += `\t\t<rdfs:domain rdf:resource="#Etat" />\n`
       xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-      xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+      xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
       xmlrdf += `\t</rdf:Property>\n`
       xmlrdf += `\n`
 
 
     // relation Ville vers Zone Urbaine 
   
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasZoneUrbaine" rdfs:label="hasZoneUrbaine" rdfs:comment="Pour une ville sa zone urbaine ">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasZoneUrbaine" rdfs:label="hasZoneUrbaine" rdfs:comment="Pour une ville sa zone urbaine ">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#Ville" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
     // relation Ville vers ces literaux 
 
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasName" rdfs:label="hasName" rdfs:comment="Le nom de la ville">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasName" rdfs:label="hasName" rdfs:comment="Le nom de la ville">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#Ville" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasPopulation" rdfs:label="hasPopulation" rdfs:comment="La population de la ville">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasPopulation" rdfs:label="hasPopulation" rdfs:comment="La population de la ville">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#Ville" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
     // relation Zone Urbaine vers ces literaux
     
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasHousing" rdfs:label="hasHousing" rdfs:comment="Capacité d’hebergement de la zone urbaine (note sur 10)">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasHousing" rdfs:label="hasHousing" rdfs:comment="Capacité d’hebergement de la zone urbaine (note sur 10)">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#ZoneUrbaine" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasCostofLiving" rdfs:label="hasCostofLiving" rdfs:comment="Cout de la vie dans la zone urbaine (note sur 10)">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasCostofLiving" rdfs:label="hasCostofLiving" rdfs:comment="Cout de la vie dans la zone urbaine (note sur 10)">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#ZoneUrbaine" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasStartups" rdfs:label="hasStartups" rdfs:comment="Nombre de startups de la zone urbaine (note sur 10)">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasStartups" rdfs:label="hasStartups" rdfs:comment="Nombre de startups de la zone urbaine (note sur 10)">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#ZoneUrbaine" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasVentureCapital" rdfs:label="hasVentureCapital" rdfs:comment="Le capital-risque de la zone urbaine (note sur 10)">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasVentureCapital" rdfs:label="hasVentureCapital" rdfs:comment="Le capital-risque de la zone urbaine (note sur 10)">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#ZoneUrbaine" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasTravelConnectivity" rdfs:label="hasTravelConnectivity" rdfs:comment="Capacité à voyager dans la zone urbaine (note sur 10)">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasTravelConnectivity" rdfs:label="hasTravelConnectivity" rdfs:comment="Capacité à voyager dans la zone urbaine (note sur 10)">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#ZoneUrbaine" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasCommute" rdfs:label="hasCommute" rdfs:comment="Les transport en commmuns de la zone urbaine (note sur 10)">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasCommute" rdfs:label="hasCommute" rdfs:comment="Les transport en commmuns de la zone urbaine (note sur 10)">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#ZoneUrbaine" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasBusinessFreedom" rdfs:label="hasBusinessFreedom" rdfs:comment="La liberté des affaires dans la zone urbaine (note sur 10)">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasBusinessFreedom" rdfs:label="hasBusinessFreedom" rdfs:comment="La liberté des affaires dans la zone urbaine (note sur 10)">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#ZoneUrbaine" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasSafety" rdfs:label="hasSafety" rdfs:comment="La sécurité dans la zone urbaine (note sur 10)">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasSafety" rdfs:label="hasSafety" rdfs:comment="La sécurité dans la zone urbaine (note sur 10)">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#ZoneUrbaine" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
 
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasHealthcare" rdfs:label="hasHealthcare" rdfs:comment="Indicateur de santé de la zone urbaine (note sur 10)">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasHealthcare" rdfs:label="hasHealthcare" rdfs:comment="Indicateur de santé de la zone urbaine (note sur 10)">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#ZoneUrbaine" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasEducation" rdfs:label="hasEducation" rdfs:comment="La Qualité de l’éducation de la zone urbaine (note sur 10)">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasEducation" rdfs:label="hasEducation" rdfs:comment="La Qualité de l’éducation de la zone urbaine (note sur 10)">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#ZoneUrbaine" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasEnvironmentalQuality" rdfs:label="hasEnvironmentalQuality" rdfs:comment="La qualité de l’environnement dans la zone urbaine (note sur 10)">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasEnvironmentalQuality" rdfs:label="hasEnvironmentalQuality" rdfs:comment="La qualité de l’environnement dans la zone urbaine (note sur 10)">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#ZoneUrbaine" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasEconomy" rdfs:label="hasEconomy" rdfs:comment="La situation économique de la zone urbaine (note sur 10)">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasEconomy" rdfs:label="hasEconomy" rdfs:comment="La situation économique de la zone urbaine (note sur 10)">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#ZoneUrbaine" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasTaxation" rdfs:label="hasTaxation" rdfs:comment="Le montant des impôts dans la zone urbaine (note sur 10)">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasTaxation" rdfs:label="hasTaxation" rdfs:comment="Le montant des impôts dans la zone urbaine (note sur 10)">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#ZoneUrbaine" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasInternetAccess" rdfs:label="hasInternetAccess" rdfs:comment="L’accès à Internet dans la zone urbaine (note sur 10)">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasInternetAccess" rdfs:label="hasInternetAccess" rdfs:comment="L’accès à Internet dans la zone urbaine (note sur 10)">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#ZoneUrbaine" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasLeisureCulture" rdfs:label="hasLeisureCulture" rdfs:comment="L’accès à la culture dans la zone urbaine (note sur 10)">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasLeisureCulture" rdfs:label="hasLeisureCulture" rdfs:comment="L’accès à la culture dans la zone urbaine (note sur 10)">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#ZoneUrbaine" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasTolerance" rdfs:label="hasTolerance" rdfs:comment="L’ouverture d’esprit de la zone urbaine (note sur 10)">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasTolerance" rdfs:label="hasTolerance" rdfs:comment="L’ouverture d’esprit de la zone urbaine (note sur 10)">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#ZoneUrbaine" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 
-    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdfvocabulary#hasOutdoors" rdfs:label="hasOutdoors" rdfs:comment="Les activités à l’extérieur de la zone urbaine (note sur 10)">\n`
+    xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasOutdoors" rdfs:label="hasOutdoors" rdfs:comment="Les activités à l’extérieur de la zone urbaine (note sur 10)">\n`
     xmlrdf += `\t\t<rdfs:domain rdf:resource="#ZoneUrbaine" />\n`
     xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
-    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdfvocabulary" />\n`
+    xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
     xmlrdf += `\t</rdf:Property>\n`
     xmlrdf += `\n`
 

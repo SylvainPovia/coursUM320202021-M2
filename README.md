@@ -61,11 +61,15 @@ Comme mentionné précédemment, vous devez donc renseigner le format désiré.
 Ensuite, nous avons la route qui renvoi des données de covid pour un état ainsi que la liste des villes présentent dans cet état.
 
 Cette route est accessible via le lien suivant :
-- /etat/:etat.:format?
+- /state/:state.:format?
 
-Pour finir, nous avons la route qui permet d'atteindre la dernière granularité, c'est à dire celle de la ville dans un état. Cette dernière est disponible au lien suivant :
-- /etat/:etat/ville/:ville.:format?
+De même, nous avons la route qui permet d'atteindre la dernière granularité, c'est à dire celle de la ville dans un état. Cette dernière est disponible au lien suivant :
+- /state/:state/city/:city.:format?
 
+Enfin, nous avons mis à disposition un fichier de descriptions qui permet de comprendre l'architecture des données que contient notre API. Ce fichier, de format xml+rdf est directement disponible au lien suivant : 
+- /rdf_vocabulary
+
+Il n'y a pas besoin d'y spécifier le format.Pour cette dernière données, le xml+rdf est le seul format actif pour ce dernier.
 ## La gestion des erreurs
 La gestion des erreurs a été un point marquant pour notre travail. En effet, avant de la mettre en place, chaque fois que l'on entrait une mauvaise route, l'API chargait indéfiniemment quelque chose qui n'existe pas. Pour palier cela, nous avons construit un filtre qui s'appuie sur les paramètres de ville et etat qui sont demandés. Ce filtre nous permet de savoir si vous entrez un mauvais nom d'état, où un mauvais nom de ville. Dans ce cas, l'API vous le fera savoir et ne mettra pas X temps à charger quelque chose qui n'existe pas.
 
