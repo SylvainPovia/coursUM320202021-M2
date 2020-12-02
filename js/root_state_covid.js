@@ -27,7 +27,7 @@ var root_state_covid = async function root_state_covid(state){
     info_state[state_id] = {}
     temp = get_json_covid_info.filter(function(item){return item.state == state_id;})[0]
     info_state[state_id] = {"state":state, "date":temp["date"], "death":temp["death"], 
-                              "positive":temp["positive"], "negative":temp["negtive"], "totalTestResultsSource":temp["positive"],
+                              "positive":temp["positive"], "negative":temp["negative"], "totalTestResultsSource":temp["totalTestResultsSource"],
                               "hospitalizedCurrently":temp["hospitalizedCurrently"]}
     info_state[state_id]['cities'] = []
     // Boucle cities
