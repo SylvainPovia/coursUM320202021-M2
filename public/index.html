@@ -33,15 +33,20 @@
     <div class="wrapper">
       <div class="feature" margin="auto">
         <div class="feature__item">
-          <h3 class="section__title">/etat/:etat.:format?</h3>
-          <p>Send a json of the covid informations for each state and return the cities in the state.
-            You must provide the format you want, .xml download an xml+rdf file and .json send you a json file.
+          <h3 class="section__title">/state/:state.:format?</h3>
+          <p>Returns a json or xml+rdf of the covid-19 informations for each state and return the cities in the state.
+            You must specify the format you want, .xml download an xml+rdf file and  .json send you a json file.
           </p>
         </div>
         <div class="feature__item">
-          <h3 class="section__title">/etat/:etat/ville/:ville.:format?</h3>
-          <p>Send a json of the covid informations for the state of the city and return it demographic informations.The same here, you have to precise the format you want between xml(xml+rdf) and json.
+          <h3 class="section__title">/state/:state/city/:city.:format?</h3>
+          <p>Returns a json or xml+rdf of the covid informations for the state of the city and return it demographic informations.
+            The same here, you must specify in which format you want the data.
           </p>
+        </div>
+        <div class="feature__item">
+          <h3 class="section__title">/rdf_vocabulary</h3>
+          <p>Returns an xml+rdf that contains the api data descriptions. </p>
         </div>
       </div>
     </div>
@@ -50,14 +55,72 @@
         <h3 class="section__title">Changelog</h3>
         <div class="changelog__item">
           <div class="changelog__meta">
+            <h4 class="changelog__title">v6</h4>
+            <small class="changelog__date">21/11/2020 -> 29/11/2020</small>
+          </div>
+          <div class="changelog__detail">
+            <ul>
+              <li>Renamed our variables names</li>
+              <li>Improved the client website</li>
+              <li>Completed the work on the errors handling</li>
+              <li>We added the xml+rdf descriptions file to our routes</li>
+              <li>started to work on graphs</li>
+            </ul>
+          </div>
+        </div>
+        <div class="changelog__item">
+          <div class="changelog__meta">
+            <h4 class="changelog__title">v5</h4>
+            <small class="changelog__date">11/11/2020 -> 21/11/2020</small>
+          </div>
+          <div class="changelog__detail">
+            <ul>
+              <li>Added documentation(team, data, links, routes, errors, specs)</li>
+              <li>We work on the cors policy</li>
+              <li>We lost of lot of time on the content content-negociation</li>
+              <li>"application/xml+rdf" format did not work while fetching our data with correct headers</li>
+              <li>We left it as it was with the parameter format that works well </li>
+            </ul>
+          </div>
+        </div>
+        <div class="changelog__item">
+          <div class="changelog__meta">
+            <h4 class="changelog__title">v4</h4>
+            <small class="changelog__date">11/11/2020</small>
+          </div>
+          <div class="changelog__detail">
+            <ul>
+              <li>Try to handle the content-negociation (json and xml+rdf)</li>
+              <li>We had an issue with the xml+rdf format</li>
+              <li>We add a format parameter in our routes to solve the issue</li>
+              <li>We defined the graphics we want to realize for the client website</li>
+            </ul>
+          </div>
+        </div>
+        <div class="changelog__item">
+          <div class="changelog__meta">
+            <h4 class="changelog__title">v3</h4>
+            <small class="changelog__date">05/11/2020 & 06/11/2020</small>
+          </div>
+          <div class="changelog__detail">
+            <ul>
+              <li>We worked on the structure of the data</li>
+              <li>We worked on the descriptions file. (xml+rdf)</li>
+              <li>We started to work on the content-negociation</li>
+              <li>We started to work on a client website</li>
+            </ul>
+          </div>
+        </div>
+        <div class="changelog__item">
+          <div class="changelog__meta">
             <h4 class="changelog__title">v2</h4>
             <small class="changelog__date">04/11/2020</small>
           </div>
           <div class="changelog__detail">
             <ul>
-              <li>Define routes for our Api</li>
-              <li>Improve loading time for city informations</li>
-              <li>Debug functions</li>
+              <li>We defined routes for our Api</li>
+              <li>Improved loading time for city informations (many fetch depending the number of city in the state)</li>
+              <li>We tried to handle errors (user bad routes or bad states/cities)</li>
             </ul>
           </div>
         </div>
@@ -68,7 +131,8 @@
           </div>
           <div class="changelog__detail">
             <ul>
-              <li>Merge covid info and global info by city</li>
+              <li>We Merged states informations with the cities ones</li>
+              <li>We started to develop a user interface for the API </li>
             </ul>
           </div>
         </div>
@@ -79,8 +143,10 @@
           </div>
           <div class="changelog__detail">
             <ul>
-              <li>Send USA states and city info</li>
-              <li>Send USA Covid-19 info</li>
+              <li>We searched for API's</li>
+              <li>Built our API core</li>
+              <li>Sent some USA states and city informations</li>
+              <li>Sent some USA Covid-19 info</li>
             </ul>
           </div>
         </div>
