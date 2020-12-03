@@ -1,15 +1,11 @@
 <?xml version="1.0"?>
 
-<rdf:RDF
-  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-  xmlns:dc="https://www.dublincore.org/specifications/dublin-core/usageguide/2005-11-07/elements/"
-  >
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dc="https://www.dublincore.org/specifications/dublin-core/usageguide/2005-11-07/elements/">
 
   <!--Définition des classes-->
 
   <!--Class Etat -->
-  <rdfs:Class rdf:about="mondomain/rdfvocabulary#Etat">
+<rdfs:Class rdf:about="mondomain/rdfvocabulary#Etat">
     <rdfs:label xml:lang="en">Etat</rdfs:label>
     <rdfs:comment xml:lang="fr">Un Etat des Etats-Unis</rdfs:comment>
   </rdfs:Class>
