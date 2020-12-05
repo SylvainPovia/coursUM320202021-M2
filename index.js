@@ -40,8 +40,8 @@ app.get("/state/:state/city/:city.:format?", function(req, res){
       },
       "application/xml" : function() {
         if (value =="error"){ 
-          res.send("<p>There is no such couple as <b>" + ville +", "+ etat + "</b>. Try <a href="+req.headers.host+"/state_list.json>" +"click here</a> to see the correct state list.</p>"+
-          "<p>Then, you should check if the city you want exist in the state by doing : <a href="+req.headers.host+"/state/"+etat+"/city/"+ville+".json>"+"click here</a></p>" )
+          res.send("<p>There is no such couple as <b>" + ville +", "+ etat + "</b>. Try <a href=http://"+req.headers.host+"/state_list.json>" +"click here</a> to see the correct state list.</p>"+
+          "<p>Then, you should check if the city you want exist in the state by doing : <a href=http://"+req.headers.host+"/state/"+etat+"/city/"+ville+".json>"+"click here</a></p>" )
 
         } else {
         var cityjsondata = value[Object.keys(value)[0]]
@@ -95,7 +95,7 @@ app.get("/state/:state.:format?", function(req, res){
       },
       "application/xml": function(){
         if (value =="error"){ 
-          res.send("<p><b>" + state + "</b> doesn`t exist. Try <a href="+req.headers.host+"/state_list.json >" +"click here</a> to see the correct state list.</p>"+
+          res.send("<p><b>" + state + "</b> doesn`t exist. Try <a href=http://"+req.headers.host+"/state_list.json >" +"click here</a> to see the correct state list.</p>"+
           "<p>You can also try with a .xml at the end if you want to get an xml+rdf file.</p>")
         } else {
           var statejsondata = value[Object.keys(value)[0]]
