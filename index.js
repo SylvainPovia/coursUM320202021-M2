@@ -41,7 +41,7 @@ app.get("/state/:state/city/:city.:format?", function(req, res){
       "application/xml" : function() {
         if (value =="error"){ 
           res.send("<p>There is no such couple as <b>" + ville +", "+ etat + "</b>. Try <a href=http://"+req.headers.host+"/state_list.json>" +"click here</a> to see the correct state list.</p>"+
-          "<p>Then, you should check if the city you want exist in the state by doing : <a href=http://"+req.headers.host+"/state/"+etat+"/city/"+ville+".json>"+"click here</a></p>" )
+          "<p>Then, you should check if the city you want exist in the state by doing : <a href=http://"+req.headers.host+"/state/"+etat+".json>"+"click here</a></p>" )
 
         } else {
         var cityjsondata = value[Object.keys(value)[0]]
