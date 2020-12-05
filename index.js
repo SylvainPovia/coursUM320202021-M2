@@ -40,9 +40,8 @@ app.get("/state/:state/city/:city.:format?", function(req, res){
       },
       "application/xml" : function() {
         if (value =="error"){ 
-          res.send("<p>There is no such couple as <b>" + ville +", "+ etat + "</b>. Try <a href="+req.headers.host+"/state_list.json>" +req.headers.host + 
-          "/state_list.json</a> to see the correct state list.</p>"+
-          "<p>Then, you should check if the city you want exist in the state by doing : <a href="+req.headers.host+"/etat/"+etat+"/ville/"+ville+".json>"+req.headers.host+"/etat/"+etat+"/ville/"+ville+".json</a></p>" )
+          res.send("<p>There is no such couple as <b>" + ville +", "+ etat + "</b>. Try <a href="+req.headers.host+"/state_list.json>" +"click here</a> to see the correct state list.</p>"+
+          "<p>Then, you should check if the city you want exist in the state by doing : <a href="+req.headers.host+"/state/"+etat+"/city/"+ville+".json>"+"click here</a></p>" )
 
         } else {
         var cityjsondata = value[Object.keys(value)[0]]
@@ -96,15 +95,14 @@ app.get("/state/:state.:format?", function(req, res){
       },
       "application/xml": function(){
         if (value =="error"){ 
-          res.send("<p><b>" + state + "</b> doesn`t exist. Try <a href="+req.headers.host+"/state_list.json>" +req.headers.host + 
-          "/state_list.json</a> to see the correct state list.</p>"+
+          res.send("<p><b>" + state + "</b> doesn`t exist. Try <a href="+req.headers.host+"/state_list.json >" +"click here</a> to see the correct state list.</p>"+
           "<p>You can also try with a .xml at the end if you want to get an xml+rdf file.</p>")
         } else {
           var statejsondata = value[Object.keys(value)[0]]
           res.setHeader("Content-disposition", "attachement; filename=" + statejsondata.state + ".rdf")
           var xmlrdf = `<?xml version="1.0"?>\n`
           xmlrdf += `<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:si="https://www.w3schools.com/rdf/">\n`
-          xmlrdf += `\t<niceapi:Etat>\n`
+          xmlrdf += `\t<niceapi:State>\n`
           xmlrdf += `\t\t<niceapi:hasName>` + statejsondata.state +`</niceapi:hasName>\n`
           xmlrdf += `\t\t<niceapi:hascovidDataLastDate>` + statejsondata.date + `</niceapi:hascovidDataLastDate>\n`
           xmlrdf += `\t\t<niceapi:hasDeaths>` + statejsondata.death + `</niceapi:hasDeaths>\n`
@@ -118,7 +116,7 @@ app.get("/state/:state.:format?", function(req, res){
             xmlrdf += `\t\t\t</niceapi:City>\n`
           })
           xmlrdf += `\t\t</niceapi:hasCities>\n`
-          xmlrdf += `\t</niceapi:Etat>\n`
+          xmlrdf += `\t</niceapi:State>\n`
           xmlrdf += `</rdf:RDF>`
           res.send(xmlrdf)
         }
@@ -171,8 +169,8 @@ app.get("/rdf_vocabulary", function(req, res){
       
       // Définition des classes
       // Class Etat 
-      xmlrdf += `\t<rdfs:Class rdf:about="${req.headers.host}/rdf_vocabulary#Etat">\n`
-      xmlrdf += `\t\t<rdfs:label xml:lang="en">Etat</rdfs:label>\n`
+      xmlrdf += `\t<rdfs:Class rdf:about="${req.headers.host}/rdf_vocabulary#State">\n`
+      xmlrdf += `\t\t<rdfs:label xml:lang="en">State</rdfs:label>\n`
       xmlrdf += `\t\t<rdfs:comment xml:lang="fr">Un Etat des Etats-Unis</rdfs:comment>\n`
       xmlrdf += `\t</rdfs:Class>\n`
       xmlrdf += `\n`
@@ -187,7 +185,7 @@ app.get("/rdf_vocabulary", function(req, res){
       // Class Ville
       xmlrdf += `\t<rdfs:Class rdf:about="${req.headers.host}/rdf_vocabulary#Ville">\n`
       xmlrdf += `\t\t<rdfs:label xml:lang="en">Ville</rdfs:label>\n`
-      xmlrdf += `\t\t<rdfs:comment xml:lang="fr">Une Ville dans une ZoneUrbaine dans un Etat des Etats-Unis</rdfs:comment>\n`
+      xmlrdf += `\t\t<rdfs:comment xml:lang="fr">Une Ville dans une Zone urbaine dans un Etat des Etats-Unis</rdfs:comment>\n`
       xmlrdf += `\t</rdfs:Class>\n`
       xmlrdf += `\n`
 
@@ -196,7 +194,7 @@ app.get("/rdf_vocabulary", function(req, res){
       // relation Etat vers Ville
       
       xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasVille" rdfs:label="hasVille" rdfs:comment="Pour un etat sa liste de ville ">\n`
-      xmlrdf += `\t\t<rdfs:domain rdf:resource="#Etat" />\n`
+      xmlrdf += `\t\t<rdfs:domain rdf:resource="#State" />\n`
       xmlrdf += `\t\t<rdfs:range rdf:resource="${req.headers.host}/rdf_vocabulary#Ville" />\n`
       xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
       xmlrdf += `\t</rdf:Property>\n`
@@ -204,42 +202,42 @@ app.get("/rdf_vocabulary", function(req, res){
 
       // relation Etat vers ces literaux
       xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasName" rdfs:label="hasName" rdfs:comment="Le nom de l’état">\n`
-      xmlrdf += `\t\t<rdfs:domain rdf:resource="#Etat" />\n`
+      xmlrdf += `\t\t<rdfs:domain rdf:resource="#State" />\n`
       xmlrdf += `\t\t<rdfs:range rdf:resource="${req.headers.host}/rdf_vocabulary#Ville" />\n`
       xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
       xmlrdf += `\t</rdf:Property>\n`
       xmlrdf += `\n`
 
       xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasNegative" rdfs:label="hasNegative" rdfs:comment="Le nombre de cas négatif au covid 19 pour l’état">\n`
-      xmlrdf += `\t\t<rdfs:domain rdf:resource="#Etat" />\n`
+      xmlrdf += `\t\t<rdfs:domain rdf:resource="#State" />\n`
       xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
       xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
       xmlrdf += `\t</rdf:Property>\n`
       xmlrdf += `\n`
 
       xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasPositive" rdfs:label="hasPositive" rdfs:comment="Le nombre de cas positif au covid 19pour l’état">\n`
-      xmlrdf += `\t\t<rdfs:domain rdf:resource="#Etat" />\n`
+      xmlrdf += `\t\t<rdfs:domain rdf:resource="#State" />\n`
       xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
       xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
       xmlrdf += `\t</rdf:Property>\n`
       xmlrdf += `\n`
 
       xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hasDeath" rdfs:label="hasDeath" rdfs:comment="Le nombre de morts dû au covid 19 pour l’état">\n`
-      xmlrdf += `\t\t<rdfs:domain rdf:resource="#Etat" />\n`
+      xmlrdf += `\t\t<rdfs:domain rdf:resource="#State" />\n`
       xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
       xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
       xmlrdf += `\t</rdf:Property>\n`
       xmlrdf += `\n`
     
       xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hastotalTestResultSource" rdfs:label="hastotalTestResultSource" rdfs:comment="Le nombre de test au covid 19 pour l’état">\n`
-      xmlrdf += `\t\t<rdfs:domain rdf:resource="#Etat" />\n`
+      xmlrdf += `\t\t<rdfs:domain rdf:resource="#State" />\n`
       xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
       xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
       xmlrdf += `\t</rdf:Property>\n`
       xmlrdf += `\n`
 
       xmlrdf += `\t<rdf:Property rdf:about="${req.headers.host}/rdf_vocabulary#hashospitalized" rdfs:label="hashospitalized" rdfs:comment="Le nombre d’hospitalisation du au covid 19 pour l’état">\n`
-      xmlrdf += `\t\t<rdfs:domain rdf:resource="#Etat" />\n`
+      xmlrdf += `\t\t<rdfs:domain rdf:resource="#State" />\n`
       xmlrdf += `\t\t<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>\n`
       xmlrdf += `\t\t<rdfs:isDefinedBy rdf:resource="${req.headers.host}/rdf_vocabulary" />\n`
       xmlrdf += `\t</rdf:Property>\n`
