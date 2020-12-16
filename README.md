@@ -6,7 +6,7 @@
 
 Le goupe est composé de :
 
-- Arthur GUICQUIAUD (arthur.gicquiaud@gmail.com)
+- Arthur GICQUIAUD (arthur.gicquiaud@gmail.com)
 - Joseph AKABROU (Joakabrou@gmail.com)
 - Théo ORIOL (theo.oriol@lilo.org)
 - Sylvain POVIA (syl.povia@gmail.com)
