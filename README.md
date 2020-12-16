@@ -15,7 +15,7 @@ Le goupe est composé de :
 # Nice API ? C'est quoi ?
 
 
-Nice API est issue de la volonté de mieux comprendre le comportement et l'évolution de l'épidémie de covid 19 aux Etats-Unis. En croisant les données covid 19 pour chaque état comme le nombre de cas négatif recensé, avec des indices sociétales comme qualité de vie de la ville. Ainsi, Nice API propose : 
+Nice API est issue de la volonté de mieux comprendre le comportement et l'évolution de l'épidémie de covid 19 aux Etats-Unis. En croisant les données covid 19 pour chaque état comme le nombre de cas négatif recensé, avec des indices sociétales comme la qualité de vie de la ville. Ainsi, Nice API propose : 
 - Un service de pipe http pour utiliser le croisement des dernières données covid 19 de chaque etats des États-Unis avec leurs indices sociétaux
 - Une page web qui utilise les données citées précedemment pour donner un comparatif de deux villes aux États-Unis.
 
