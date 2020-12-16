@@ -48,6 +48,7 @@ De cette manière, on peut regarder les données de manière globale, pour ensui
 Pour chaque données que nous proposons via notre API, nous avons deux format disponible 
   - json 
   - xml+rdf
+
 Au cours de notre travail, nous avons eu des problèmes a proposer différents contenu via le paramètre application/xml+rdf. En effet, lorsque l'on utilisait le paramètre dans les headers de la fonction fetch, le fetch nous retournait <b>toujours</b> json. Ainsi, pour simplifier l'accès aux différents formats, nous avons intégrer le format de données recherché dans le liens vers les données. Ainsi, pour chaque routes vers lesquelles vous allé pointer, votre appel doit se terminer par .json dans le cas ou vous souhaiter récupérer du json, et .xml dans le cas ou vous préférer télécharger un fichier .rdf
 ## Les liens
 
